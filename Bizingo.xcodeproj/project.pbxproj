@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		DC4273FA23E7036A00392E06 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4273F923E7036A00392E06 /* Board.swift */; };
+		DC9B54B923EB1DA4000A8A34 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B54B823EB1DA4000A8A34 /* Triangle.swift */; };
+		DC9B54BB23EB1DB5000A8A34 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B54BA23EB1DB5000A8A34 /* Cell.swift */; };
 		DCBE3A0D23E46DBA00DD086D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE3A0C23E46DBA00DD086D /* AppDelegate.swift */; };
 		DCBE3A1323E46DBA00DD086D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE3A1223E46DBA00DD086D /* GameScene.swift */; };
 		DCBE3A1523E46DBA00DD086D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE3A1423E46DBA00DD086D /* GameViewController.swift */; };
 		DCBE3A1823E46DBA00DD086D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCBE3A1623E46DBA00DD086D /* Main.storyboard */; };
 		DCBE3A1A23E46DBD00DD086D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCBE3A1923E46DBD00DD086D /* Assets.xcassets */; };
 		DCBE3A1D23E46DBD00DD086D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCBE3A1B23E46DBD00DD086D /* LaunchScreen.storyboard */; };
-		DCBE3A2723E4701A00DD086D /* SKShapeNode+Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE3A2623E4701A00DD086D /* SKShapeNode+Triangle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DC4273F923E7036A00392E06 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		DC9B54B823EB1DA4000A8A34 /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		DC9B54BA23EB1DB5000A8A34 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		DCBE3A0923E46DBA00DD086D /* Bizingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bizingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBE3A0C23E46DBA00DD086D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCBE3A1223E46DBA00DD086D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -27,7 +30,6 @@
 		DCBE3A1923E46DBD00DD086D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCBE3A1C23E46DBD00DD086D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCBE3A1E23E46DBD00DD086D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCBE3A2623E4701A00DD086D /* SKShapeNode+Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKShapeNode+Triangle.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,8 @@
 				DCBE3A1223E46DBA00DD086D /* GameScene.swift */,
 				DCBE3A1423E46DBA00DD086D /* GameViewController.swift */,
 				DC4273F923E7036A00392E06 /* Board.swift */,
-				DCBE3A2623E4701A00DD086D /* SKShapeNode+Triangle.swift */,
+				DC9B54BA23EB1DB5000A8A34 /* Cell.swift */,
+				DC9B54B823EB1DA4000A8A34 /* Triangle.swift */,
 				DCBE3A1623E46DBA00DD086D /* Main.storyboard */,
 				DCBE3A1923E46DBD00DD086D /* Assets.xcassets */,
 				DCBE3A1B23E46DBD00DD086D /* LaunchScreen.storyboard */,
@@ -145,10 +148,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCBE3A1323E46DBA00DD086D /* GameScene.swift in Sources */,
-				DCBE3A2723E4701A00DD086D /* SKShapeNode+Triangle.swift in Sources */,
 				DC4273FA23E7036A00392E06 /* Board.swift in Sources */,
+				DC9B54B923EB1DA4000A8A34 /* Triangle.swift in Sources */,
 				DCBE3A1523E46DBA00DD086D /* GameViewController.swift in Sources */,
 				DCBE3A0D23E46DBA00DD086D /* AppDelegate.swift in Sources */,
+				DC9B54BB23EB1DB5000A8A34 /* Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
