@@ -11,22 +11,28 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    
+    let skView = SKView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = self.view as! SKView? {
-            
-            let scene = GameScene(size: view.frame.size)
-            scene.scaleMode = .aspectFill
-            
-            view.presentScene(scene)
-            
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+        view.addSubview(skView)
+        
+        skView.translatesAutoresizingMaskIntoConstraints = false
+        skView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        skView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        skView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        skView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        
+        let scene = GameScene(size: view.frame.size)
+        scene.scaleMode = .aspectFill
+        
+        skView.presentScene(scene)
+        
+        skView.ignoresSiblingOrder = true
+        skView.showsFPS = true
+        skView.showsNodeCount = true
     }
 
     override var shouldAutorotate: Bool {

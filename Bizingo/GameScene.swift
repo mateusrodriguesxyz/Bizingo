@@ -38,10 +38,12 @@ class GameScene: SKScene {
         
         self.addChild(piece)
         
-        children.compactMap({$0 as? SKShapeNode}).forEach { child in
-            let distance = CGPointDistanceSquared(from: node.position, to: child.position)
-            if distance.rounded(.up) == pow(node.frame.width, 2) && child.fillColor == node.fillColor {
-                child.fillColor = .green
+        board.cells.forEach { (cell) in
+            let distance = CGPointDistanceSquared(from: node.position, to: cell.node.position)
+            if distance.rounded(.up) == pow(node.frame.width, 2) && cell.node.fillColor == node.fillColor {
+                cell.isHightlighted = true
+            } else {
+                cell.isHightlighted = false
             }
         }
 

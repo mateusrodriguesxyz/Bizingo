@@ -16,6 +16,16 @@ class Cell {
     var rotation: CGFloat
     var node: Triangle!
     
+    var isHightlighted = false {
+        willSet {
+            if newValue {
+                node.fillColor = .white
+            } else {
+                node.fillColor = color
+            }
+        }
+    }
+    
     init(row: Int, column: Int, color: UIColor, rotation: CGFloat) {
         self.row = row
         self.column = column
