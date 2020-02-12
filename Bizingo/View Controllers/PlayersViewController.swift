@@ -14,10 +14,11 @@ class PlayersViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var players = [Player]()
+    
     let provider: PlayerProvider = { (tableView, indexPath, player) in
         let cell = tableView.dequeueReusableCell(withIdentifier: "player-cell", for: indexPath) as! PlayerTableViewCell
-        cell.nicknameLabel.text = player.nickname
-        cell.statusView.backgroundColor = player.isConnected ? .systemGreen : .systemRed
+        cell.configure(with: player)
         return cell
     }
     
@@ -38,6 +39,23 @@ class PlayersViewController: UIViewController {
         super.viewDidAppear(animated)
         if nickname == nil {
             requestNickname()
+        }
+    }
+    
+    @IBAction func join(_ sender: Any) {
+        
+        let chat = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chat-controller") as! ChatViewController
+        
+        chat.nickname = nickname
+        chat.players = players
+        
+        addChild(chat)
+        
+        chat.view.frame = view.bounds
+        self.view.addSubview(chat.view)
+        
+        UIView.transition(from: self.view, to: chat.view, duration: 0.25, options: .transitionCrossDissolve) { _ in
+            chat.didMove(toParent: self)
         }
     }
     
@@ -64,6 +82,7 @@ class PlayersViewController: UIViewController {
             SCKManager.shared.connectToServer(with: self.nickname) { (players) in
                 DispatchQueue.main.async {
                     if let players = players {
+                        self.players = players
                         self.update(with: players)
                     }
                 }

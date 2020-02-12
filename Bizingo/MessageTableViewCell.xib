@@ -17,12 +17,12 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sha-FR-yxY">
-                        <rect key="frame" x="10" y="10" width="62" height="181"/>
+                        <rect key="frame" x="10" y="10" width="68" height="181"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRr-9N-kAj">
-                                <rect key="frame" x="10" y="10" width="42" height="161"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="10" y="10" width="48" height="161"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -36,7 +36,7 @@
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="10"/>
+                                <integer key="value" value="20"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -50,6 +50,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="balloonView" destination="sha-FR-yxY" id="Uql-Dp-XUa"/>
                 <outlet property="leadingConstraint" destination="kZf-S2-gzj" id="3Em-sf-99i"/>
                 <outlet property="messageLabel" destination="eRr-9N-kAj" id="Vzw-CP-G5a"/>
                 <outlet property="trailingConstraint" destination="g59-fn-6Y4" id="eV2-5L-4b7"/>

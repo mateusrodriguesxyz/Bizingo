@@ -15,6 +15,8 @@ class ChatViewController: UIViewController {
     
     var nickname: String!
     
+    var players = [Player]()
+    
     var messages = [Message]()
     
     override func viewDidLoad() {
@@ -56,6 +58,10 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "message-cell") as! MessageTableViewCell
         let message = messages[indexPath.row]
         cell.messageLabel.text = message.content
+        
+        let player = players.first { $0.nickname == message.sender }
+        
+        cell.balloonView.backgroundColor = player!.number == 0 ? .systemBlue : .systemRed
         
         if message.sender == nickname {
             cell.leadingConstraint.isActive = false

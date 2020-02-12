@@ -14,7 +14,7 @@ class GameScene: SKScene {
     let board = Board()
     
     override func didMove(to view: SKView) {
-        
+        self.backgroundColor = .clear
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
         board.cells.forEach { (cell) in

@@ -32,11 +32,9 @@ class SCKManager: NSObject {
     }
     
     func connectToServer(with nickname: String, completion: @escaping ([Player]?) -> Void) {
-        socket.emit("connectUser", nickname)
-        socket.on("userList") { (data, _) -> Void in
-            let players = (data[0] as? [[String: AnyObject]])?.map({
-                Player(nickname: $0["nickname"] as! String, isConnected: $0["isConnected"] as! Bool)
-            })
+        socket.emit("connect", nickname)
+        socket.on("players") { (data, _) in
+            let players = (data[0] as? [[String: AnyObject]])?.map(Player.init)
             completion(players)
         }
     }

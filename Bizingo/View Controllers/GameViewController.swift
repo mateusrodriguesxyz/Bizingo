@@ -20,6 +20,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(skView)
         view.addSubview(uiView)
+        setupSKview()
+        setupUIview()
     }
     
     private func setupSKview() {
@@ -33,8 +35,8 @@ class GameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         
-        let scene = GameScene(size: view.frame.size)
-        scene.scaleMode = .aspectFill
+        let scene = GameScene(size: CGSize(width: 800, height: 800))
+        scene.scaleMode = .aspectFit
         
         skView.presentScene(scene)
     }
@@ -48,8 +50,17 @@ class GameViewController: UIViewController {
         
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "players-controller")
         self.addChild(controller)
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
         self.uiView.addSubview(controller.view)
         controller.didMove(toParent: self)
+        
+        controller.view.leadingAnchor.constraint(equalTo: uiView.leadingAnchor).isActive = true
+        controller.view.trailingAnchor.constraint(equalTo: uiView.trailingAnchor).isActive = true
+        controller.view.topAnchor.constraint(equalTo: uiView.topAnchor).isActive = true
+        controller.view.bottomAnchor.constraint(equalTo: uiView.bottomAnchor).isActive = true
+        
+        
+        
     }
 
     override var shouldAutorotate: Bool {

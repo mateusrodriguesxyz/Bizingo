@@ -25,3 +25,12 @@ class PlayerTableViewCell: UITableViewCell {
     }
     
 }
+
+extension PlayerTableViewCell {
+    public func configure(with player: Player) {
+        self.nicknameLabel.text = player.nickname
+        self.statusView.backgroundColor = player.number == 0 ? .systemBlue : .systemRed
+        self.statusView.alpha = player.isConnected ? 1.0 : 0.5
+    }
+    
+}

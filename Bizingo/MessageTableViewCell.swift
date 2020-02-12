@@ -13,6 +13,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet var leadingConstraint: NSLayoutConstraint!
     @IBOutlet var trailingConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var balloonView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     
     override func awakeFromNib() {

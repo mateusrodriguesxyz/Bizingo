@@ -50,7 +50,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="zrl-uz-Y5W" kind="presentation" identifier="chat" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="SXg-o1-xI2"/>
+                                    <action selector="join:" destination="Nzj-Q1-eM0" eventType="touchUpInside" id="WjJ-OC-g4L"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -76,7 +76,7 @@
         <!--Chat View Controller-->
         <scene sceneID="fxq-mZ-M8o">
             <objects>
-                <viewController id="zrl-uz-Y5W" customClass="ChatViewController" customModule="Bizingo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chat-controller" id="zrl-uz-Y5W" customClass="ChatViewController" customModule="Bizingo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7OP-ZV-bBn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
