@@ -13,26 +13,43 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     let skView = SKView()
+    
+    let uiView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(skView)
-        
+        view.addSubview(uiView)
+    }
+    
+    private func setupSKview() {
         skView.translatesAutoresizingMaskIntoConstraints = false
         skView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         skView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         skView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         skView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
         
+        skView.ignoresSiblingOrder = true
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        
         let scene = GameScene(size: view.frame.size)
         scene.scaleMode = .aspectFill
         
         skView.presentScene(scene)
+    }
+    
+    private func setupUIview() {
+        uiView.translatesAutoresizingMaskIntoConstraints = false
+        uiView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        uiView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        uiView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        uiView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
         
-        skView.ignoresSiblingOrder = true
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "players-controller")
+        self.addChild(controller)
+        self.uiView.addSubview(controller.view)
+        controller.didMove(toParent: self)
     }
 
     override var shouldAutorotate: Bool {

@@ -3,13 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC0C6D2023F1DF15008F4D77 /* SCKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C6D1F23F1DF15008F4D77 /* SCKManager.swift */; };
+		DC0C6D2323F1ED0F008F4D77 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C6D2123F1ED0F008F4D77 /* PlayerTableViewCell.swift */; };
+		DC0C6D2423F1ED0F008F4D77 /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC0C6D2223F1ED0F008F4D77 /* PlayerTableViewCell.xib */; };
+		DC0C6D2623F1F574008F4D77 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C6D2523F1F574008F4D77 /* ChatViewController.swift */; };
 		DC4273FA23E7036A00392E06 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4273F923E7036A00392E06 /* Board.swift */; };
+		DC50C33423F1D467006EDF15 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50C33323F1D467006EDF15 /* PlayersViewController.swift */; };
+		DC6F3C7123F1FC9A00E4B75B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F3C7023F1FC9A00E4B75B /* Player.swift */; };
+		DC90B46423F1DC0D0021D67B /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DC90B46323F1DC0D0021D67B /* SocketIO */; };
 		DC9B54B923EB1DA4000A8A34 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B54B823EB1DA4000A8A34 /* Triangle.swift */; };
 		DC9B54BB23EB1DB5000A8A34 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B54BA23EB1DB5000A8A34 /* Cell.swift */; };
+		DCB6203123F3273C00A89622 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB6203023F3273C00A89622 /* Message.swift */; };
+		DCB6203423F3296C00A89622 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB6203223F3296C00A89622 /* MessageTableViewCell.swift */; };
+		DCB6203523F3296C00A89622 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB6203323F3296C00A89622 /* MessageTableViewCell.xib */; };
 		DCBE3A0D23E46DBA00DD086D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE3A0C23E46DBA00DD086D /* AppDelegate.swift */; };
 		DCBE3A1323E46DBA00DD086D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE3A1223E46DBA00DD086D /* GameScene.swift */; };
 		DCBE3A1523E46DBA00DD086D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE3A1423E46DBA00DD086D /* GameViewController.swift */; };
@@ -19,9 +29,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC0C6D1F23F1DF15008F4D77 /* SCKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCKManager.swift; sourceTree = "<group>"; };
+		DC0C6D2123F1ED0F008F4D77 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
+		DC0C6D2223F1ED0F008F4D77 /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
+		DC0C6D2523F1F574008F4D77 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		DC4273F923E7036A00392E06 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		DC50C33323F1D467006EDF15 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
+		DC6F3C7023F1FC9A00E4B75B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		DC9B54B823EB1DA4000A8A34 /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		DC9B54BA23EB1DB5000A8A34 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		DCB6203023F3273C00A89622 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		DCB6203223F3296C00A89622 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		DCB6203323F3296C00A89622 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		DCBE3A0923E46DBA00DD086D /* Bizingo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bizingo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBE3A0C23E46DBA00DD086D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCBE3A1223E46DBA00DD086D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -37,12 +56,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC90B46423F1DC0D0021D67B /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC6F3C6F23F1FC7A00E4B75B /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				DC0C6D1F23F1DF15008F4D77 /* SCKManager.swift */,
+				DC6F3C7023F1FC9A00E4B75B /* Player.swift */,
+				DCB6203023F3273C00A89622 /* Message.swift */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
+		DCB6202F23F3177100A89622 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DCBE3A1423E46DBA00DD086D /* GameViewController.swift */,
+				DC50C33323F1D467006EDF15 /* PlayersViewController.swift */,
+				DC0C6D2523F1F574008F4D77 /* ChatViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		DCBE3A0023E46DBA00DD086D = {
 			isa = PBXGroup;
 			children = (
@@ -64,11 +104,16 @@
 			children = (
 				DCBE3A0C23E46DBA00DD086D /* AppDelegate.swift */,
 				DCBE3A1223E46DBA00DD086D /* GameScene.swift */,
-				DCBE3A1423E46DBA00DD086D /* GameViewController.swift */,
+				DC6F3C6F23F1FC7A00E4B75B /* Socket */,
+				DCB6202F23F3177100A89622 /* View Controllers */,
 				DC4273F923E7036A00392E06 /* Board.swift */,
 				DC9B54BA23EB1DB5000A8A34 /* Cell.swift */,
 				DC9B54B823EB1DA4000A8A34 /* Triangle.swift */,
 				DCBE3A1623E46DBA00DD086D /* Main.storyboard */,
+				DC0C6D2123F1ED0F008F4D77 /* PlayerTableViewCell.swift */,
+				DCB6203223F3296C00A89622 /* MessageTableViewCell.swift */,
+				DCB6203323F3296C00A89622 /* MessageTableViewCell.xib */,
+				DC0C6D2223F1ED0F008F4D77 /* PlayerTableViewCell.xib */,
 				DCBE3A1923E46DBD00DD086D /* Assets.xcassets */,
 				DCBE3A1B23E46DBD00DD086D /* LaunchScreen.storyboard */,
 				DCBE3A1E23E46DBD00DD086D /* Info.plist */,
@@ -92,6 +137,9 @@
 			dependencies = (
 			);
 			name = Bizingo;
+			packageProductDependencies = (
+				DC90B46323F1DC0D0021D67B /* SocketIO */,
+			);
 			productName = Bizingo;
 			productReference = DCBE3A0923E46DBA00DD086D /* Bizingo.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +168,9 @@
 				Base,
 			);
 			mainGroup = DCBE3A0023E46DBA00DD086D;
+			packageReferences = (
+				DC90B46223F1DC0D0021D67B /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+			);
 			productRefGroup = DCBE3A0A23E46DBA00DD086D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,7 +185,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC0C6D2423F1ED0F008F4D77 /* PlayerTableViewCell.xib in Resources */,
 				DCBE3A1823E46DBA00DD086D /* Main.storyboard in Resources */,
+				DCB6203523F3296C00A89622 /* MessageTableViewCell.xib in Resources */,
 				DCBE3A1A23E46DBD00DD086D /* Assets.xcassets in Resources */,
 				DCBE3A1D23E46DBD00DD086D /* LaunchScreen.storyboard in Resources */,
 			);
@@ -147,12 +200,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC6F3C7123F1FC9A00E4B75B /* Player.swift in Sources */,
 				DCBE3A1323E46DBA00DD086D /* GameScene.swift in Sources */,
+				DC50C33423F1D467006EDF15 /* PlayersViewController.swift in Sources */,
 				DC4273FA23E7036A00392E06 /* Board.swift in Sources */,
 				DC9B54B923EB1DA4000A8A34 /* Triangle.swift in Sources */,
 				DCBE3A1523E46DBA00DD086D /* GameViewController.swift in Sources */,
 				DCBE3A0D23E46DBA00DD086D /* AppDelegate.swift in Sources */,
+				DCB6203423F3296C00A89622 /* MessageTableViewCell.swift in Sources */,
+				DC0C6D2323F1ED0F008F4D77 /* PlayerTableViewCell.swift in Sources */,
 				DC9B54BB23EB1DB5000A8A34 /* Cell.swift in Sources */,
+				DCB6203123F3273C00A89622 /* Message.swift in Sources */,
+				DC0C6D2623F1F574008F4D77 /* ChatViewController.swift in Sources */,
+				DC0C6D2023F1DF15008F4D77 /* SCKManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +366,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = academy.mateus.Bizingo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -324,7 +384,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = academy.mateus.Bizingo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -350,6 +410,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DC90B46223F1DC0D0021D67B /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DC90B46323F1DC0D0021D67B /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC90B46223F1DC0D0021D67B /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DCBE3A0123E46DBA00DD086D /* Project object */;
 }

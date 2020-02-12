@@ -1,21 +1,23 @@
 //
-//  PlayerTableViewCell.swift
+//  MessageTableViewCell.swift
 //  Bizingo
 //
-//  Created by Mateus Rodrigues on 10/02/20.
+//  Created by Mateus Rodrigues on 11/02/20.
 //  Copyright © 2020 Mateus Rodrigues. All rights reserved.
 //
 
 import UIKit
 
-class PlayerTableViewCell: UITableViewCell {
+class MessageTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet var leadingConstraint: NSLayoutConstraint!
+    @IBOutlet var trailingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var messageLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .none
+        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
