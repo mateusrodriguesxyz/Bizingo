@@ -14,6 +14,8 @@ class GameViewController: UIViewController {
     
     let skView = SKView()
     let uiView = UIView()
+    
+    let scene = GameScene(size: CGSize(width: 800, height: 800))
 
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
@@ -36,10 +38,8 @@ class GameViewController: UIViewController {
         skView.showsNodeCount = true
         skView.allowsTransparency = true
         
-        let scene = GameScene(size: CGSize(width: 800, height: 800))
-        scene.scaleMode = .aspectFit
-        
         skView.presentScene(scene)
+        skView.scene?.scaleMode = .aspectFit
         skView.backgroundColor = .clear
     }
     
@@ -60,9 +60,6 @@ class GameViewController: UIViewController {
         controller.view.trailingAnchor.constraint(equalTo: uiView.trailingAnchor).isActive = true
         controller.view.topAnchor.constraint(equalTo: uiView.topAnchor).isActive = true
         controller.view.bottomAnchor.constraint(equalTo: uiView.bottomAnchor).isActive = true
-        
-        
-        
     }
 
     override var shouldAutorotate: Bool {

@@ -13,13 +13,21 @@ class GameScene: SKScene {
     
     let board = Board()
     
+    let piece = SKShapeNode(circleOfRadius: 10)
+    
     override func didMove(to view: SKView) {
         self.backgroundColor = .clear
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
 
         board.cells.forEach { (cell) in
             self.addChild(cell.node)
         }
+        
+        self.addChild(piece)
+        
+        piece.strokeColor = .clear
+        piece.fillColor = .orange
         
     }
     
@@ -29,26 +37,17 @@ class GameScene: SKScene {
         
         guard let node = children.first(where: { $0.contains(position)} ) as? Triangle else { return }
         
-        let piece = SKShapeNode(circleOfRadius: 10)
-        
         piece.position = node.centroid
-        
-        piece.strokeColor = .clear
-        piece.fillColor = .orange
-        
-        self.addChild(piece)
         
         board.cells.forEach { (cell) in
             let distance = CGPointDistanceSquared(from: node.position, to: cell.node.position)
-            if distance.rounded(.up) == pow(node.frame.width, 2) && cell.node.fillColor == node.fillColor {
+            if distance.rounded(.up) == pow(node.frame.width, 2) && cell.node.zRotation == node.zRotation {
                 cell.isHightlighted = true
             } else {
                 cell.isHightlighted = false
             }
         }
 
-        node.fillColor = .white
-        
     }
     
 }

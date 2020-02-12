@@ -19,7 +19,7 @@ class Cell {
     var isHightlighted = false {
         willSet {
             if newValue {
-                node.fillColor = .white
+                node.fillColor = .orange
             } else {
                 node.fillColor = color
             }

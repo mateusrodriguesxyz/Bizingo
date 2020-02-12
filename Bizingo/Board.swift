@@ -37,7 +37,9 @@ class Board {
     }
     
     private func makeCellFor(row: Int, column: Int) -> Cell {
-        let colors: (UIColor, UIColor) = (row < 9) ? (.red, .blue) : (.blue, .red)
+        let c1 = UIColor.systemGray3
+        let c2 = UIColor.systemGray6
+        let colors: (UIColor, UIColor) = (row < 9) ? (c1, c2) : (c2, c1)
         let rotations: (CGFloat, CGFloat) = (row < 9) ? (.zero, .pi) : (.pi, .zero)
         let color: UIColor = column.isMultiple(of: 2) ? colors.0 : colors.1
         let rotation: CGFloat = column.isMultiple(of: 2) ? rotations.0 : rotations.1
