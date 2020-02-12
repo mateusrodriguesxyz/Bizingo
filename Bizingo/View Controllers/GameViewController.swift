@@ -13,10 +13,10 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     let skView = SKView()
-    
     let uiView = UIView()
 
     override func viewDidLoad() {
+        view.backgroundColor = .systemBackground
         super.viewDidLoad()
         view.addSubview(skView)
         view.addSubview(uiView)
@@ -27,18 +27,20 @@ class GameViewController: UIViewController {
     private func setupSKview() {
         skView.translatesAutoresizingMaskIntoConstraints = false
         skView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        skView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        skView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        skView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
         skView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        skView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         skView.ignoresSiblingOrder = true
         skView.showsFPS = true
         skView.showsNodeCount = true
+        skView.allowsTransparency = true
         
         let scene = GameScene(size: CGSize(width: 800, height: 800))
         scene.scaleMode = .aspectFit
         
         skView.presentScene(scene)
+        skView.backgroundColor = .clear
     }
     
     private func setupUIview() {
