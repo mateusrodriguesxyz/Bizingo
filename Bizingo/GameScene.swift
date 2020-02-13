@@ -13,7 +13,7 @@ class GameScene: SKScene {
     
     let board = Board()
     
-    let piece = SKShapeNode(circleOfRadius: 10)
+    var pieces = [SKShapeNode]()
     
     override func didMove(to view: SKView) {
         self.backgroundColor = .clear
@@ -22,12 +22,23 @@ class GameScene: SKScene {
 
         board.cells.forEach { (cell) in
             self.addChild(cell.node)
+            if cell.hasPiece {
+                let piece = SKShapeNode(circleOfRadius: 10)
+                piece.strokeColor = .clear
+                piece.fillColor = .orange
+                piece.position = cell.node.centroid
+                self.pieces.append(piece)
+                self.addChild(piece)
+            }
         }
         
-        self.addChild(piece)
-        
-        piece.strokeColor = .clear
-        piece.fillColor = .orange
+        do {
+            let data = try JSONEncoder().encode(board.cells)
+            let string = String(data: data, encoding: .utf8)
+            print(string!)
+        } catch {
+            fatalError()
+        }
         
     }
     
@@ -37,7 +48,7 @@ class GameScene: SKScene {
         
         guard let node = children.first(where: { $0.contains(position)} ) as? Triangle else { return }
         
-        piece.position = node.centroid
+//        piece.position = node.centroid
         
         board.cells.forEach { (cell) in
             let distance = CGPointDistanceSquared(from: node.position, to: cell.node.position)
