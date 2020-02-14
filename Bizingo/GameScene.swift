@@ -61,32 +61,19 @@ class GameScene: SKScene {
         
         if selectedPiece != nil {
             if let destination = highlightedCells.first(where: { $0.node.contains(position)} ) {
-                
                 let origin = board.cells.first(where: { $0.node.contains(selectedPiece.position) })
-                
                 SCKManager.shared.send(movement: .init(from: origin!, to: destination))
-                
                 selectedPiece = nil
-                
                 clearHighlightedCell()
             }
         } else {
-            
             guard let piece = pieces.first(where: { $0.contains(position)} ) else { return }
-                    
             self.selectedPiece = piece
-            
-            guard let selectedCell = board.cells.first(where: { $0.node.contains(position) } )?.node else { return }
-            
-            board.cells.forEach { (cell) in
-                let distance = CGPointDistanceSquared(from: selectedCell.position, to: cell.node.position)
-                if distance.rounded(.up) == pow(selectedCell.frame.width, 2) && cell.node.zRotation == selectedCell.zRotation {
-                    if !cell.hasPiece {
-                        cell.isHightlighted = true
-                        self.highlightedCells.append(cell)
-                    } else {
-                        cell.isHightlighted = false
-                    }
+            guard let selected = board.cells.first(where: { $0.node.contains(position) } ) else { return }
+            selected.neighbors.forEach { (cell) in
+                if !cell.hasPiece {
+                    cell.isHightlighted = true
+                    self.highlightedCells.append(cell)
                 } else {
                     cell.isHightlighted = false
                 }
@@ -103,6 +90,7 @@ class GameScene: SKScene {
         let piece = pieces.first(where: { origin.node.contains($0.position) })!
         
         piece.position = destination.node.centroid
+        
         origin.hasPiece = false
         destination.hasPiece = true
         
@@ -115,9 +103,7 @@ class GameScene: SKScene {
     }
     
     func clearHighlightedCell() {
-        highlightedCells.forEach {
-            $0.isHightlighted = false
-        }
+        highlightedCells.forEach { $0.isHightlighted = false }
         highlightedCells.removeAll()
     }
     

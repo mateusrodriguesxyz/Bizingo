@@ -18,17 +18,30 @@ class Board {
         do {
             let data = try Data(contentsOf: file)
             self.cells = try JSONDecoder().decode([Cell].self, from: data)
+            
             self.cells.forEach { (cell) in
                 cell.node = Triangle(side: 50)
-                cell.node.position = cell.position!
+                cell.node.position = cell.position
                 cell.node.zRotation = cell.rotation
                 cell.node.fillColor = cell.color
                 cell.node.strokeColor = .clear
+                
+                
+                self.cells.forEach {
+                    let distance = CGPointDistanceSquared(from: cell.position, to: $0.position)
+                    if distance.rounded(.up) == pow(50, 2), $0.rotation == cell.rotation {
+                        cell.neighbors.append($0)
+                    }
+                }
+                
             }
+            
         } catch {
             print(error.localizedDescription)
             return nil
         }
+        
+        
     }
     
 //    private func setup() {

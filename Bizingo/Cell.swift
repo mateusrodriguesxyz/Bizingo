@@ -13,7 +13,7 @@ class Cell: Codable {
     var row: Int
     var column: Int
     var rotation: CGFloat
-    var position: CGPoint?
+    var position: CGPoint!
     var hasPiece: Bool
     var node: Triangle!
     
@@ -34,6 +34,8 @@ class Cell: Codable {
             }
         }
     }
+    
+    var neighbors: [Cell] = []
     
     init(row: Int, column: Int, rotation: CGFloat, hasPiece: Bool = false) {
         self.row = row

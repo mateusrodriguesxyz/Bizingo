@@ -36,7 +36,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAj-KD-Il7">
                                 <rect key="frame" x="167" y="822" width="80" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="OwL-EP-2es"/>
                                     <constraint firstAttribute="height" constant="30" id="pai-Ib-Spv"/>
@@ -94,6 +94,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="4cz-1d-y9V"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.1565787196" green="0.15989294649999999" blue="0.20549461250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="arrow.up.circle.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
