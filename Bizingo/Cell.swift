@@ -26,7 +26,9 @@ class Cell: Codable {
     var isHightlighted = false {
         willSet {
             if newValue {
-                node.fillColor = .orange
+                let c1 = UIColor.systemRed
+                let c2 = UIColor.systemBlue
+                node.fillColor = rotation == 0 ?  c1 : c2
             } else {
                 node.fillColor = color
             }

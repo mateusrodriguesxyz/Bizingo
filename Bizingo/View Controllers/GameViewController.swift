@@ -14,16 +14,16 @@ class GameViewController: UIViewController {
     
     let skView = SKView()
     let uiView = UIView()
-    
+
     let scene = GameScene(size: CGSize(width: 800, height: 800))
 
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground
         super.viewDidLoad()
+        view.backgroundColor = .black
         view.addSubview(skView)
         view.addSubview(uiView)
         setupSKview()
-        setupUIview()
+//        setupUIview()
     }
     
     private func setupSKview() {
@@ -41,6 +41,7 @@ class GameViewController: UIViewController {
         skView.presentScene(scene)
         skView.scene?.scaleMode = .aspectFit
         skView.backgroundColor = .clear
+        
     }
     
     private func setupUIview() {
@@ -61,20 +62,5 @@ class GameViewController: UIViewController {
         controller.view.topAnchor.constraint(equalTo: uiView.topAnchor).isActive = true
         controller.view.bottomAnchor.constraint(equalTo: uiView.bottomAnchor).isActive = true
     }
-
-    override var shouldAutorotate: Bool {
-        return true
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    
 }

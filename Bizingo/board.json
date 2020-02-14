@@ -141,7 +141,7 @@
    },
    {
       "row":2,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":2,
       "position":[
          -50,
@@ -161,7 +161,7 @@
    },
    {
       "row":2,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":4,
       "position":[
          0,
@@ -181,7 +181,7 @@
    },
    {
       "row":2,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":6,
       "position":[
          50,
@@ -231,7 +231,7 @@
    },
    {
       "row":3,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":2,
       "position":[
          -75,
@@ -251,7 +251,7 @@
    },
    {
       "row":3,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":4,
       "position":[
          -25,
@@ -271,7 +271,7 @@
    },
    {
       "row":3,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":6,
       "position":[
          25,
@@ -291,7 +291,7 @@
    },
    {
       "row":3,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":8,
       "position":[
          75,
@@ -341,7 +341,7 @@
    },
    {
       "row":4,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":2,
       "position":[
          -100,
@@ -361,7 +361,7 @@
    },
    {
       "row":4,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":4,
       "position":[
          -50,
@@ -381,7 +381,7 @@
    },
    {
       "row":4,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":6,
       "position":[
          0,
@@ -401,7 +401,7 @@
    },
    {
       "row":4,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":8,
       "position":[
          50,
@@ -421,7 +421,7 @@
    },
    {
       "row":4,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":10,
       "position":[
          100,
@@ -471,7 +471,7 @@
    },
    {
       "row":5,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":2,
       "position":[
          -125,
@@ -491,7 +491,7 @@
    },
    {
       "row":5,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":4,
       "position":[
          -75,
@@ -511,7 +511,7 @@
    },
    {
       "row":5,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":6,
       "position":[
          -25,
@@ -531,7 +531,7 @@
    },
    {
       "row":5,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":8,
       "position":[
          25,
@@ -551,7 +551,7 @@
    },
    {
       "row":5,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":10,
       "position":[
          75,
@@ -571,7 +571,7 @@
    },
    {
       "row":5,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":12,
       "position":[
          125,
@@ -801,7 +801,7 @@
    },
    {
       "row":7,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":3,
       "position":[
          -150,
@@ -821,7 +821,7 @@
    },
    {
       "row":7,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":5,
       "position":[
          -100,
@@ -841,7 +841,7 @@
    },
    {
       "row":7,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":7,
       "position":[
          -50,
@@ -861,7 +861,7 @@
    },
    {
       "row":7,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":9,
       "position":[
          0,
@@ -881,7 +881,7 @@
    },
    {
       "row":7,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":11,
       "position":[
          50,
@@ -901,7 +901,7 @@
    },
    {
       "row":7,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":13,
       "position":[
          100,
@@ -921,7 +921,7 @@
    },
    {
       "row":7,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":15,
       "position":[
          150,
@@ -1011,7 +1011,7 @@
    },
    {
       "row":8,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":5,
       "position":[
          -125,
@@ -1031,7 +1031,7 @@
    },
    {
       "row":8,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":7,
       "position":[
          -75,
@@ -1051,7 +1051,7 @@
    },
    {
       "row":8,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":9,
       "position":[
          -25,
@@ -1071,7 +1071,7 @@
    },
    {
       "row":8,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":11,
       "position":[
          25,
@@ -1091,7 +1091,7 @@
    },
    {
       "row":8,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":13,
       "position":[
          75,
@@ -1111,7 +1111,7 @@
    },
    {
       "row":8,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":15,
       "position":[
          125,
@@ -1231,7 +1231,7 @@
    },
    {
       "row":9,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":6,
       "position":[
          -100,
@@ -1251,7 +1251,7 @@
    },
    {
       "row":9,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":8,
       "position":[
          -50,
@@ -1271,7 +1271,7 @@
    },
    {
       "row":9,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":10,
       "position":[
          0,
@@ -1291,7 +1291,7 @@
    },
    {
       "row":9,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":12,
       "position":[
          50,
@@ -1311,7 +1311,7 @@
    },
    {
       "row":9,
-      "hasPeice":false,
+      "hasPeice":true,
       "column":14,
       "position":[
          100,
