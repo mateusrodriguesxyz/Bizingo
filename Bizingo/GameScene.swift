@@ -11,7 +11,7 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let board = Board()
+    let board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
     
     var pieces = [SKShapeNode]()
     
