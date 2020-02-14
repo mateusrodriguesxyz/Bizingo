@@ -47,6 +47,12 @@ class SCKManager: NSObject {
     func send(message: String, with nickname: String) {
         socket.emit("chatMessage", nickname, message)
     }
+
+    func send(move: Move) {
+        if let data = try? JSONEncoder().encode(move) {
+            socket.emit("gameMove", data)
+        }
+    }
     
     func getChatMessage(completion: @escaping (Message) -> Void) {
         socket.on("newChatMessage") { (data, _) -> Void in

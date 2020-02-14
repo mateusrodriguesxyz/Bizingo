@@ -37,9 +37,7 @@ class GameScene: SKScene {
             }
         }
         
-        children.forEach {
-            print($0.zPosition)
-        }
+        apply(move: Move(from: .init(row: 2, column: 2), to: .init(row: 2, column: 0)))
         
 //        do {
 //            let data = try JSONEncoder().encode(board.cells)
@@ -56,21 +54,17 @@ class GameScene: SKScene {
         guard let position = touches.first?.location(in: self) else { return }
         
         if pieceToMove != nil {
-            if let cell = highlightedCells.first(where: { $0.node.contains(position)} ) {
-                let currentPosition = pieceToMove?.position
-                pieceToMove?.position = cell.node.centroid
+            if let destination = highlightedCells.first(where: { $0.node.contains(position)} ) {
+                
+                let origin = board.cells.first(where: { $0.node.contains(pieceToMove!.position) })
+                
+                let move = Move(from: origin!, to: destination)
+                
+                self.apply(move: move)
+                
                 highlightedCells.forEach {
                     $0.isHightlighted = false
                 }
-                board.cells.forEach { (cell) in
-                    print(cell.node.centroid, currentPosition)
-                }
-                if let cellForPiece = board.cells.first(where: { $0.node.contains(currentPosition!) }) {
-                    cellForPiece.hasPiece = false
-                } else {
-                    
-                }
-                cell.hasPiece = true
                 pieceToMove = nil
                 highlightedCells.removeAll()
             }
@@ -80,11 +74,11 @@ class GameScene: SKScene {
                     
             self.pieceToMove = piece
             
-            guard let triangle = children.first(where: { $0.contains(position) && $0 is Triangle } ) else { return }
+            guard let selected = board.cells.first(where: { $0.node.contains(position) } )?.node else { return }
             
             board.cells.forEach { (cell) in
-                let distance = CGPointDistanceSquared(from: triangle.position, to: cell.node.position)
-                if distance.rounded(.up) == pow(triangle.frame.width, 2) && cell.node.zRotation == triangle.zRotation {
+                let distance = CGPointDistanceSquared(from: selected.position, to: cell.node.position)
+                if distance.rounded(.up) == pow(selected.frame.width, 2) && cell.node.zRotation == selected.zRotation {
                     if !cell.hasPiece {
                         cell.isHightlighted = true
                         self.highlightedCells.append(cell)
@@ -98,6 +92,20 @@ class GameScene: SKScene {
             }
         }
 
+    }
+    
+    func apply(move: Move) {
+        
+        let origin = board.cells.first(where: { $0.row == move.from.row && $0.column ==  move.from.column })
+        let destination = board.cells.first(where: { $0.row == move.to.row && $0.column ==  move.to.column })
+        
+        let piece = pieces.first(where: { origin!.node.contains($0.position) })
+        
+        piece!.position = destination!.node.centroid
+        origin?.hasPiece = false
+        destination?.hasPiece = true
+        
+        
     }
     
 }

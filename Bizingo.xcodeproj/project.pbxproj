@@ -13,6 +13,7 @@
 		DC0C6D2623F1F574008F4D77 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C6D2523F1F574008F4D77 /* ChatViewController.swift */; };
 		DC1E6F2B23F5D3D300800E3B /* board.json in Resources */ = {isa = PBXBuildFile; fileRef = DC1E6F2A23F5D3D300800E3B /* board.json */; };
 		DC1E6F2F23F6C94300800E3B /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1E6F2E23F6C94300800E3B /* Piece.swift */; };
+		DC1E6F3123F6E43F00800E3B /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1E6F3023F6E43F00800E3B /* Move.swift */; };
 		DC4273FA23E7036A00392E06 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4273F923E7036A00392E06 /* Board.swift */; };
 		DC50C33423F1D467006EDF15 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50C33323F1D467006EDF15 /* PlayersViewController.swift */; };
 		DC6F3C7123F1FC9A00E4B75B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F3C7023F1FC9A00E4B75B /* Player.swift */; };
@@ -37,6 +38,7 @@
 		DC0C6D2523F1F574008F4D77 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		DC1E6F2A23F5D3D300800E3B /* board.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = board.json; sourceTree = "<group>"; };
 		DC1E6F2E23F6C94300800E3B /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
+		DC1E6F3023F6E43F00800E3B /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		DC4273F923E7036A00392E06 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		DC50C33323F1D467006EDF15 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		DC6F3C7023F1FC9A00E4B75B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				DC0C6D1F23F1DF15008F4D77 /* SCKManager.swift */,
 				DC6F3C7023F1FC9A00E4B75B /* Player.swift */,
 				DCB6203023F3273C00A89622 /* Message.swift */,
+				DC1E6F3023F6E43F00800E3B /* Move.swift */,
 			);
 			path = Socket;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				DCB6203423F3296C00A89622 /* MessageTableViewCell.swift in Sources */,
 				DC1E6F2F23F6C94300800E3B /* Piece.swift in Sources */,
 				DC0C6D2323F1ED0F008F4D77 /* PlayerTableViewCell.swift in Sources */,
+				DC1E6F3123F6E43F00800E3B /* Move.swift in Sources */,
 				DC9B54BB23EB1DB5000A8A34 /* Cell.swift in Sources */,
 				DCB6203123F3273C00A89622 /* Message.swift in Sources */,
 				DC0C6D2623F1F574008F4D77 /* ChatViewController.swift in Sources */,
