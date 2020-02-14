@@ -15,7 +15,7 @@ class GameScene: SKScene {
     
     var pieces = [Piece]()
     
-    var pieceToMove: Piece? = nil
+    var selectedPiece: Piece! = nil
     
     var highlightedCells: [Cell] = []
     
@@ -37,7 +37,13 @@ class GameScene: SKScene {
             }
         }
         
-        apply(move: Move(from: .init(row: 2, column: 2), to: .init(row: 2, column: 0)))
+        SCKManager.shared.getGameMovement { (move) in
+            if let move = move {
+                self.apply(move: move)
+            }
+        }
+        
+        
         
 //        do {
 //            let data = try JSONEncoder().encode(board.cells)
@@ -53,39 +59,34 @@ class GameScene: SKScene {
         
         guard let position = touches.first?.location(in: self) else { return }
         
-        if pieceToMove != nil {
+        if selectedPiece != nil {
             if let destination = highlightedCells.first(where: { $0.node.contains(position)} ) {
                 
-                let origin = board.cells.first(where: { $0.node.contains(pieceToMove!.position) })
+                let origin = board.cells.first(where: { $0.node.contains(selectedPiece.position) })
                 
-                let move = Move(from: origin!, to: destination)
+                SCKManager.shared.send(movement: .init(from: origin!, to: destination))
                 
-                self.apply(move: move)
+                selectedPiece = nil
                 
-                highlightedCells.forEach {
-                    $0.isHightlighted = false
-                }
-                pieceToMove = nil
-                highlightedCells.removeAll()
+                clearHighlightedCell()
             }
         } else {
             
             guard let piece = pieces.first(where: { $0.contains(position)} ) else { return }
                     
-            self.pieceToMove = piece
+            self.selectedPiece = piece
             
-            guard let selected = board.cells.first(where: { $0.node.contains(position) } )?.node else { return }
+            guard let selectedCell = board.cells.first(where: { $0.node.contains(position) } )?.node else { return }
             
             board.cells.forEach { (cell) in
-                let distance = CGPointDistanceSquared(from: selected.position, to: cell.node.position)
-                if distance.rounded(.up) == pow(selected.frame.width, 2) && cell.node.zRotation == selected.zRotation {
+                let distance = CGPointDistanceSquared(from: selectedCell.position, to: cell.node.position)
+                if distance.rounded(.up) == pow(selectedCell.frame.width, 2) && cell.node.zRotation == selectedCell.zRotation {
                     if !cell.hasPiece {
                         cell.isHightlighted = true
                         self.highlightedCells.append(cell)
                     } else {
                         cell.isHightlighted = false
                     }
-                    
                 } else {
                     cell.isHightlighted = false
                 }
@@ -96,16 +97,28 @@ class GameScene: SKScene {
     
     func apply(move: Move) {
         
-        let origin = board.cells.first(where: { $0.row == move.from.row && $0.column ==  move.from.column })
-        let destination = board.cells.first(where: { $0.row == move.to.row && $0.column ==  move.to.column })
+        let origin = board.cells.first(where: { $0.row == move.from.row && $0.column ==  move.from.column })!
+        let destination = board.cells.first(where: { $0.row == move.to.row && $0.column ==  move.to.column })!
         
-        let piece = pieces.first(where: { origin!.node.contains($0.position) })
+        let piece = pieces.first(where: { origin.node.contains($0.position) })!
         
-        piece!.position = destination!.node.centroid
-        origin?.hasPiece = false
-        destination?.hasPiece = true
+        piece.position = destination.node.centroid
+        origin.hasPiece = false
+        destination.hasPiece = true
         
-        
+    }
+    
+    func move(_ piece: Piece, from origin: Cell, to destination: Cell) {
+        piece.position = destination.node.centroid
+        origin.hasPiece = false
+        destination.hasPiece = true
+    }
+    
+    func clearHighlightedCell() {
+        highlightedCells.forEach {
+            $0.isHightlighted = false
+        }
+        highlightedCells.removeAll()
     }
     
 }

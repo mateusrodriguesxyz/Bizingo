@@ -48,9 +48,9 @@ class SCKManager: NSObject {
         socket.emit("chatMessage", nickname, message)
     }
 
-    func send(move: Move) {
-        if let data = try? JSONEncoder().encode(move) {
-            socket.emit("gameMove", data)
+    func send(movement: Move) {
+        if let data = try? JSONEncoder().encode(movement) {
+            socket.emit("gameMovement", data)
         }
     }
     
@@ -58,6 +58,13 @@ class SCKManager: NSObject {
         socket.on("newChatMessage") { (data, _) -> Void in
             let message = Message(sender: data[0] as! String, content: data[1] as! String, date: data[2] as! String)
             completion(message)
+        }
+    }
+    
+    func getGameMovement(completion: @escaping (Move?) -> Void) {
+        socket.on("newGameMovement") { (data, _) -> Void in
+            let movement = try? JSONDecoder().decode(Move.self, from: (data[0] as! Data))
+            completion(movement)
         }
     }
 
