@@ -65,19 +65,20 @@ class GameScene: SKScene {
                 SCKManager.shared.send(movement: .init(from: origin!, to: destination))
                 selectedPiece = nil
                 clearHighlightedCell()
-            }
+            }   
         } else {
             guard let piece = pieces.first(where: { $0.contains(position)} ) else { return }
             self.selectedPiece = piece
             guard let selected = board.cells.first(where: { $0.node.contains(position) } ) else { return }
             selected.neighbors.forEach { (cell) in
-                if !cell.hasPiece {
+                if !cell.hasPiece && cell.color == selected.color {
                     cell.isHightlighted = true
                     self.highlightedCells.append(cell)
                 } else {
                     cell.isHightlighted = false
                 }
             }
+            
         }
 
     }
@@ -94,17 +95,54 @@ class GameScene: SKScene {
         origin.hasPiece = false
         destination.hasPiece = true
         
+        checkPieces()
+        
     }
     
     func move(_ piece: Piece, from origin: Cell, to destination: Cell) {
         piece.position = destination.node.centroid
         origin.hasPiece = false
         destination.hasPiece = true
+        checkPieces()
     }
     
     func clearHighlightedCell() {
         highlightedCells.forEach { $0.isHightlighted = false }
         highlightedCells.removeAll()
+    }
+    
+    func checkPieces() {
+
+        for (i, piece) in pieces.enumerated().reversed() {
+            
+            let cell = board.cells.first(where: { $0.node.contains(piece.position) })!
+            
+            let enemies = cell.neighbors.filter({ $0.color != cell.color })
+            
+            if enemies.allSatisfy({ $0.hasPiece }) {
+                cell.hasPiece = false
+                piece.removeFromParent()
+                pieces.remove(at: i)
+            }
+            
+            
+//            let enemies = pieces.filter {
+//               let distance = CGPointDistanceSquared(from: piece.position, to: $0.position)
+//               return distance.rounded(.up) == (2500/3).rounded(.up) && $0.fillColor != piece.fillColor
+//            }
+//            if enemies.count == 3 {
+//                let cell = board.cells.first(where: { $0.node.contains(piece.position) })
+//                cell?.hasPiece = false
+//                piece.removeFromParent()
+//                pieces.remove(at: i)
+//            }
+            
+            
+            
+        }
+        
+        
+        
     }
     
 }

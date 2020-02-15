@@ -25,16 +25,20 @@ class Board {
                 cell.node.zRotation = cell.rotation
                 cell.node.fillColor = cell.color
                 cell.node.strokeColor = .clear
-                
-                
+            }
+            
+            self.cells.forEach { (cell) in
+
                 self.cells.forEach {
-                    let distance = CGPointDistanceSquared(from: cell.position, to: $0.position)
-                    if distance.rounded(.up) == pow(50, 2), $0.rotation == cell.rotation {
+                    let distance1 = CGPointDistanceSquared(from: cell.node.position, to: $0.node.position)
+                    let distance2 = CGPointDistanceSquared(from: cell.node.centroid, to: $0.node.centroid)
+                    if distance1.rounded(.up) == pow(50, 2) || distance2.rounded(.up) == (2500/3).rounded(.up) {
                         cell.neighbors.append($0)
                     }
                 }
                 
             }
+            
             
         } catch {
             print(error.localizedDescription)
