@@ -58,6 +58,14 @@ class Board {
         
     }
     
+    func cell(at position: CGPoint) -> Cell? {
+        return self.cells.first(where: { $0.node.contains(position) })
+    }
+    
+    func piece(at position: CGPoint) -> Piece? {
+        return self.pieces.first(where: { $0.contains(position)} )
+    }
+    
     func placeNodes(at scene: SKScene) {
         cells.forEach {
             scene.addChild($0.node)

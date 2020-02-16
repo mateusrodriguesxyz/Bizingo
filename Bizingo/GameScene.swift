@@ -40,17 +40,17 @@ class GameScene: SKScene {
         
         if selectedPiece != nil {
             if let destination = highlightedCells.first(where: { $0.node.contains(position)} ) {
-                let origin = board.cells.first(where: { $0.node.contains(selectedPiece.position) })
+                let origin = board.cell(at: selectedPiece.position)
                 SCKManager.shared.send(movement: .init(from: origin!, to: destination))
                 selectedPiece = nil
                 clearHighlightedCell()
             }   
         } else {
-            guard let piece = board.pieces.first(where: { $0.contains(position)} ) else { return }
+            guard let piece = board.piece(at: position) else { return }
             self.selectedPiece = piece
-            guard let selected = board.cells.first(where: { $0.node.contains(position) } ) else { return }
-            selected.neighbors.forEach { (cell) in
-                if !cell.hasPiece && cell.color == selected.color {
+            let selectedCell = board.cell(at: position)!
+            selectedCell.neighbors.forEach { (cell) in
+                if !cell.hasPiece && cell.color == selectedCell.color {
                     cell.isHightlighted = true
                     self.highlightedCells.append(cell)
                 } else {
@@ -67,7 +67,7 @@ class GameScene: SKScene {
         let origin = board.cells.first(where: { $0.row == move.from.row && $0.column ==  move.from.column })!
         let destination = board.cells.first(where: { $0.row == move.to.row && $0.column ==  move.to.column })!
         
-        let piece = board.pieces.first(where: { origin.node.contains($0.position) })!
+        let piece = board.piece(at: origin.node.position)!
         
         piece.position = destination.node.centroid
         
@@ -76,13 +76,6 @@ class GameScene: SKScene {
         
         checkPieces()
         
-    }
-    
-    func move(_ piece: Piece, from origin: Cell, to destination: Cell) {
-        piece.position = destination.node.centroid
-        origin.hasPiece = false
-        destination.hasPiece = true
-        checkPieces()
     }
     
     func clearHighlightedCell() {
