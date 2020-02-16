@@ -23,7 +23,7 @@ class GameViewController: UIViewController {
         view.addSubview(skView)
         view.addSubview(uiView)
         setupSKview()
-//        setupUIview()
+        setupUIview()
     }
     
     private func setupSKview() {

@@ -12,8 +12,11 @@ class Piece: SKShapeNode {
     
     var isCaptain: Bool
     
-    init(color: UIColor, isCaptain: Bool) {
+    var number: Int
+    
+    init(color: UIColor, isCaptain: Bool, number: Int) {
         self.isCaptain = isCaptain
+        self.number = number
         super.init()
         self.strokeColor = .clear
         self.fillColor = color

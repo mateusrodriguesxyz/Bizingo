@@ -33,8 +33,9 @@ class Board {
                 
                 if cell.hasPiece {
                     let isCaptain = [(5,4), (5,10), (7,5), (7,13)].contains { $0 == (cell.row, cell.column)}
-                    let color = cell.rotation == 0 ? UIColor.systemRed: UIColor.systemBlue
-                    let piece = Piece(color: color, isCaptain: isCaptain)
+                    let color = cell.rotation == 0 ? UIColor.systemRed : UIColor.systemBlue
+                    let number = cell.rotation == 0 ? 1 : 0
+                    let piece = Piece(color: color, isCaptain: isCaptain, number: number)
                     piece.position = cell.node.centroid
                     piece.zPosition = 1
                     self.pieces.append(piece)

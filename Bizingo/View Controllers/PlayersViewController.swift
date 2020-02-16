@@ -80,6 +80,7 @@ class PlayersViewController: UIViewController {
             let textfield = alert.textFields![0]
             self.nickname = textfield.text
             SCKManager.shared.connectToServer(with: self.nickname) { (players) in
+                UserDefaults.standard.set(self.nickname, forKey: "nickname")
                 DispatchQueue.main.async {
                     if let players = players {
                         self.players = players

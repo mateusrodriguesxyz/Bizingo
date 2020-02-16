@@ -20,14 +20,31 @@ class GameScene: SKScene {
     
     var highlightedCells: [Cell] = []
     
+    var nickname: String {
+        return UserDefaults.standard.string(forKey: "nickname")!
+    }
+    
+    var player: Player!
+    
+    var canPlay: Bool!
+    
     override func didMove(to view: SKView) {
         self.backgroundColor = .clear
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         board.placeNodes(at: self)
         
+        SCKManager.shared.socket.on("userConnectUpdate") { (data, _) in
+            let player = Player(data: data[0] as! [String : AnyObject])
+            if player.nickname == self.nickname {
+                self.player = player
+                self.canPlay = player.number == 0
+            }
+        }
+        
         SCKManager.shared.getGameMovement { (move) in
             if let move = move {
+                self.canPlay.toggle()
                 self.apply(move: move)
             }
         }
@@ -36,17 +53,20 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        guard canPlay == true else { return }
+        
         guard let position = touches.first?.location(in: self) else { return }
         
         if selectedPiece != nil {
             if let destination = highlightedCells.first(where: { $0.node.contains(position)} ) {
                 let origin = board.cell(at: selectedPiece.position)
-                SCKManager.shared.send(movement: .init(from: origin!, to: destination))
+                SCKManager.shared.send(movement: .init(nickname: nickname, from: origin!, to: destination))
                 selectedPiece = nil
                 clearHighlightedCell()
             }   
         } else {
             guard let piece = board.piece(at: position) else { return }
+            guard piece.number == player.number else { return }
             self.selectedPiece = piece
             let selectedCell = board.cell(at: position)!
             selectedCell.neighbors.forEach { (cell) in
