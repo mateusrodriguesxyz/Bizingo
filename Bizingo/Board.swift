@@ -14,6 +14,8 @@ class Board {
     
     var cells: [Cell] = []
     
+    var pieces: [Piece] = []
+    
     init?(contentsOf file: URL) {
         do {
             let data = try Data(contentsOf: file)
@@ -28,6 +30,15 @@ class Board {
             }
             
             self.cells.forEach { (cell) in
+                
+                if cell.hasPiece {
+                    let isCaptain = [(5,4), (5,10), (7,5), (7,13)].contains { $0 == (cell.row, cell.column)}
+                    let color = cell.rotation == 0 ? UIColor.systemRed: UIColor.systemBlue
+                    let piece = Piece(color: color, isCaptain: isCaptain)
+                    piece.position = cell.node.centroid
+                    piece.zPosition = 1
+                    self.pieces.append(piece)
+                }
 
                 self.cells.forEach {
                     let distance1 = CGPointDistanceSquared(from: cell.node.position, to: $0.node.position)
@@ -45,7 +56,15 @@ class Board {
             return nil
         }
         
-        
+    }
+    
+    func placeNodes(at scene: SKScene) {
+        cells.forEach {
+            scene.addChild($0.node)
+        }
+        pieces.forEach {
+            scene.addChild($0)
+        }
     }
     
 //    private func setup() {

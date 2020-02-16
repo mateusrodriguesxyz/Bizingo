@@ -12,8 +12,9 @@ import GameplayKit
 class GameScene: SKScene {
     
     let board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
-    
-    var pieces = [Piece]()
+
+    var red = 18
+    var blue = 18
     
     var selectedPiece: Piece! = nil
     
@@ -23,35 +24,13 @@ class GameScene: SKScene {
         self.backgroundColor = .clear
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-
-        board.cells.forEach { (cell) in
-            self.addChild(cell.node)
-            if cell.hasPiece {
-                let isCaptain = [(5,4), (5,10), (7,5), (7,13)].contains { $0 == (cell.row, cell.column)}
-                let color = cell.rotation == 0 ? UIColor.systemRed: UIColor.systemBlue
-                let piece = Piece(color: color, isCaptain: isCaptain)
-                piece.position = cell.node.centroid
-                piece.zPosition = 1
-                self.pieces.append(piece)
-                self.addChild(piece)
-            }
-        }
+        board.placeNodes(at: self)
         
         SCKManager.shared.getGameMovement { (move) in
             if let move = move {
                 self.apply(move: move)
             }
         }
-        
-        
-        
-//        do {
-//            let data = try JSONEncoder().encode(board.cells)
-//            let string = String(data: data, encoding: .utf8)
-//            print(string!)
-//        } catch {
-//            fatalError()
-//        }
         
     }
     
@@ -67,7 +46,7 @@ class GameScene: SKScene {
                 clearHighlightedCell()
             }   
         } else {
-            guard let piece = pieces.first(where: { $0.contains(position)} ) else { return }
+            guard let piece = board.pieces.first(where: { $0.contains(position)} ) else { return }
             self.selectedPiece = piece
             guard let selected = board.cells.first(where: { $0.node.contains(position) } ) else { return }
             selected.neighbors.forEach { (cell) in
@@ -88,7 +67,7 @@ class GameScene: SKScene {
         let origin = board.cells.first(where: { $0.row == move.from.row && $0.column ==  move.from.column })!
         let destination = board.cells.first(where: { $0.row == move.to.row && $0.column ==  move.to.column })!
         
-        let piece = pieces.first(where: { origin.node.contains($0.position) })!
+        let piece = board.pieces.first(where: { origin.node.contains($0.position) })!
         
         piece.position = destination.node.centroid
         
@@ -113,7 +92,7 @@ class GameScene: SKScene {
     
     func checkPieces() {
 
-        for (i, piece) in pieces.enumerated().reversed() {
+        for (i, piece) in board.pieces.enumerated().reversed() {
             
             let cell = board.cells.first(where: { $0.node.contains(piece.position) })!
             
@@ -122,26 +101,27 @@ class GameScene: SKScene {
             if enemies.allSatisfy({ $0.hasPiece }) {
                 cell.hasPiece = false
                 piece.removeFromParent()
-                pieces.remove(at: i)
+                
+                if piece.fillColor.description == UIColor.systemRed.resolvedColor(with: .current).description {
+                    red -= 1
+                }
+                if piece.fillColor.description == UIColor.systemBlue.resolvedColor(with: .current).description {
+                    blue -= 1
+                }
+                
+                board.pieces.remove(at: i)
+                
+                if red == 0 {
+                   print("BLUE WON!")
+                }
+                
+                if blue == 0 {
+                   print("RED WON!")
+                }
+                
             }
             
-            
-//            let enemies = pieces.filter {
-//               let distance = CGPointDistanceSquared(from: piece.position, to: $0.position)
-//               return distance.rounded(.up) == (2500/3).rounded(.up) && $0.fillColor != piece.fillColor
-//            }
-//            if enemies.count == 3 {
-//                let cell = board.cells.first(where: { $0.node.contains(piece.position) })
-//                cell?.hasPiece = false
-//                piece.removeFromParent()
-//                pieces.remove(at: i)
-//            }
-            
-            
-            
         }
-        
-        
         
     }
     
