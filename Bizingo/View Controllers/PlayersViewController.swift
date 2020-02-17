@@ -93,12 +93,12 @@ class PlayersViewController: UIViewController {
         let action = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
             let textfield = alert.textFields![0]
             UserDefaults.standard.set(textfield.text, forKey: "nickname")
+            self.button.setTitle("CHAT", for: .normal)
             SCKManager.shared.connectToServer(with: self.nickname!) { (players) in
                 DispatchQueue.main.async {
                     if let players = players {
                         self.players = players
                         self.update(with: players)
-                        self.button.setTitle("CHAT", for: .normal)
                     }
                 }
             }
