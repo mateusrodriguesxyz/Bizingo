@@ -205,6 +205,12 @@ class GameScene: SKScene {
             let enemies = cell.neighbors.filter({ $0.color != cell.color })
             
             if enemies.allSatisfy({ $0.hasPiece }) {
+                
+                if piece.isCaptain {
+                    let pieces = enemies.compactMap({ self.board.piece(at: $0.position) })
+                    guard pieces.contains(where: { $0.isCaptain }) else { return }
+                }
+                
                 cell.hasPiece = false
                 piece.removeFromParent()
                 
