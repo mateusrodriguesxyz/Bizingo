@@ -70,7 +70,7 @@ class PlayersViewController: UIViewController {
     
     func requestNickname() {
         
-        let alert = UIAlertController(title: "SocketChat", message: "Please enter a nickname:", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Bizingo", message: "Enter your nickname", preferredStyle: .alert)
      
         alert.addTextField {
             $0.addTarget(self, action: #selector(self.textChanged), for: .editingChanged)

@@ -11,11 +11,15 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let label = SKLabelNode()
+    let restartLabel = SKLabelNode(text: "RESTART")
     
-    let board = Board(contentsOf: Bundle.main.url(forResource: "board2", withExtension: "json")!)!
+    let quitLabel = SKLabelNode(text: "QUIT")
+    
+    let winnerLabel = SKLabelNode()
+    
+    let board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
 
-    var red = 1 {
+    var red = 18 {
         didSet {
             if red == 0 {
                 SCKManager.shared.socket.emit("end", 0)
@@ -24,7 +28,7 @@ class GameScene: SKScene {
     }
     
     
-    var blue = 2 {
+    var blue = 18 {
         didSet {
             if blue == 0 {
                 SCKManager.shared.socket.emit("end", 1)
@@ -51,10 +55,16 @@ class GameScene: SKScene {
         
         self.alpha = 0.5
         
-        label.fontSize = 50
-        label.position = CGPoint(x: frame.midX, y: frame.maxY/1.25)
-           
-        addChild(label)
+        winnerLabel.position = CGPoint(x: frame.midX, y: frame.maxY/1.25)
+        addChild(winnerLabel)
+        
+        restartLabel.horizontalAlignmentMode = .left
+        restartLabel.position = CGPoint(x: frame.minX/1.5, y: frame.maxY/1.25)
+        addChild(restartLabel)
+        
+        quitLabel.horizontalAlignmentMode = .left
+        quitLabel.position = CGPoint(x: frame.minX/1.5, y: frame.maxY/1.5)
+        addChild(quitLabel)
         
         board.placeNodes(at: self)
         
@@ -77,9 +87,9 @@ class GameScene: SKScene {
         SCKManager.shared.socket.on("winner") { (data, _) in
             let winner = data[0] as! Int
             if self.player.number == winner {
-                self.label.text = "YOU WON THE GAME!"
+                self.winnerLabel.text = "YOU WON THE GAME!"
             } else {
-                self.label.text = "YOU LOST THE GAME!"
+                self.winnerLabel.text = "YOU LOST THE GAME!"
             }
         }
         
