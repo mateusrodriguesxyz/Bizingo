@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="width" constant="80" id="OwL-EP-2es"/>
                                     <constraint firstAttribute="height" constant="30" id="pai-Ib-Spv"/>
                                 </constraints>
-                                <state key="normal" title="CHAT">
+                                <state key="normal" title="JOIN">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -66,6 +66,7 @@
                         <viewLayoutGuide key="safeArea" id="tCo-Wk-UlZ"/>
                     </view>
                     <connections>
+                        <outlet property="button" destination="FAj-KD-Il7" id="3xK-Hd-WxS"/>
                         <outlet property="tableView" destination="L70-1Y-g5W" id="69f-4E-DVp"/>
                     </connections>
                 </viewController>

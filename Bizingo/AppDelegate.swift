@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UserDefaults.standard.set(nil, forKey: "nickname")
         return true
     }
 
@@ -24,6 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         SCKManager.shared.closeConnection()
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        if let nickname = UserDefaults.standard.string(forKey: "nickname") {
+            SCKManager.shared.exit(with: nickname, completionHandler: nil)
+        }
     }
 
 }

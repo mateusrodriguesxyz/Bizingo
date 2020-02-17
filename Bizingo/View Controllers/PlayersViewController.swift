@@ -14,6 +14,7 @@ class PlayersViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var button: UIButton!
     var players = [Player]()
     
     let provider: PlayerProvider = { (tableView, indexPath, player) in
@@ -24,7 +25,11 @@ class PlayersViewController: UIViewController {
     
     lazy var dataSource = UITableViewDiffableDataSource<Int, Player>(tableView: self.tableView, cellProvider: provider)
     
-    var nickname: String!
+    var nickname: String? {
+        return UserDefaults.standard.string(forKey: "nickname")
+    }
+    
+    var joined = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,16 +38,25 @@ class PlayersViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.rowHeight = 50
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        SCKManager.shared.socket.on("userExitUpdate") { (data, _) in
+            if let quitter = data[0] as? String, quitter == self.nickname {
+                UserDefaults.standard.set(nil, forKey: "nickname")
+                self.button.setTitle("JOIN", for: .normal)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if nickname == nil {
-            requestNickname()
-        }
     }
     
     @IBAction func join(_ sender: Any) {
+        
+        if nickname == nil {
+            requestNickname()
+            return
+        }
         
         let chat = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chat-controller") as! ChatViewController
         
@@ -78,13 +92,13 @@ class PlayersViewController: UIViewController {
      
         let action = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
             let textfield = alert.textFields![0]
-            self.nickname = textfield.text
-            SCKManager.shared.connectToServer(with: self.nickname) { (players) in
-                UserDefaults.standard.set(self.nickname, forKey: "nickname")
+            UserDefaults.standard.set(textfield.text, forKey: "nickname")
+            SCKManager.shared.connectToServer(with: self.nickname!) { (players) in
                 DispatchQueue.main.async {
                     if let players = players {
                         self.players = players
                         self.update(with: players)
+                        self.button.setTitle("CHAT", for: .normal)
                     }
                 }
             }

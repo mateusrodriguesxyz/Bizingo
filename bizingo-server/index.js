@@ -31,13 +31,14 @@ io.on('connection', function(clientSocket) {
     });
 
 
-  clientSocket.on("exitUser", function(clientNickname){
+  clientSocket.on("exit", function(clientNickname){
     for (var i=0; i<players.length; i++) {
       if (players[i]["id"] == clientSocket.id) {
         players.splice(i, 1);
         break;
       }
     }
+    io.emit("players", players);
     io.emit("userExitUpdate", clientNickname);
   });
 
@@ -45,6 +46,14 @@ io.on('connection', function(clientSocket) {
   clientSocket.on('chatMessage', function(clientNickname, message){
     var currentDateTime = new Date().toLocaleString();
     io.emit('newChatMessage', clientNickname, message, currentDateTime);
+  });
+
+  clientSocket.on('restart', function(restart){
+    io.emit('restart', restart);
+  });
+
+  clientSocket.on('quit', function(nickname){
+    io.emit('quit', nickname);
   });
 
   clientSocket.on('end', function(number){

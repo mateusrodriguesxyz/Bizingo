@@ -39,7 +39,7 @@ class SCKManager: NSObject {
         }
     }
     
-    func exitChat(with nickname: String, completionHandler: (() -> Void)?) {
+    func exit(with nickname: String, completionHandler: (() -> Void)?) {
         socket.emit("exitUser", nickname)
         completionHandler?()
     }

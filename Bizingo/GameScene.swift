@@ -11,13 +11,27 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let restartLabel = SKLabelNode(text: "RESTART")
+    let restartLabel: SKLabelNode = {
+        let node = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        node.text = "RESTART"
+        node.fontSize = 50
+        node.alpha = 0
+        node.horizontalAlignmentMode = .left
+        return node
+    }()
     
-    let quitLabel = SKLabelNode(text: "QUIT")
+    let quitLabel: SKLabelNode = {
+        let node = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        node.text = "QUIT"
+        node.fontSize = 50
+        node.alpha = 0
+        node.horizontalAlignmentMode = .left
+        return node
+    }()
     
     let winnerLabel = SKLabelNode()
     
-    let board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
+    var board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
 
     var red = 18 {
         didSet {
@@ -41,8 +55,8 @@ class GameScene: SKScene {
     
     var highlightedCells: [Cell] = []
     
-    var nickname: String {
-        return UserDefaults.standard.string(forKey: "nickname")!
+    var nickname: String? {
+        return UserDefaults.standard.string(forKey: "nickname")
     }
     
     var player: Player!
@@ -53,20 +67,7 @@ class GameScene: SKScene {
         self.backgroundColor = .clear
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        self.alpha = 0.5
-        
-        winnerLabel.position = CGPoint(x: frame.midX, y: frame.maxY/1.25)
-        addChild(winnerLabel)
-        
-        restartLabel.horizontalAlignmentMode = .left
-        restartLabel.position = CGPoint(x: frame.minX/1.5, y: frame.maxY/1.25)
-        addChild(restartLabel)
-        
-        quitLabel.horizontalAlignmentMode = .left
-        quitLabel.position = CGPoint(x: frame.minX/1.5, y: frame.maxY/1.5)
-        addChild(quitLabel)
-        
-        board.placeNodes(at: self)
+        initialSetup()
         
         SCKManager.shared.socket.on("userConnectUpdate") { (data, _) in
             let player = Player(data: data[0] as! [String : AnyObject])
@@ -79,7 +80,11 @@ class GameScene: SKScene {
         SCKManager.shared.socket.on("players") { (data, _) in
             let players = (data[0] as? [[String: AnyObject]])?.map(Player.init)
             if players?.count == 2 {
-                self.alpha = 1.0
+                self.restartLabel.alpha = 1
+                self.quitLabel.alpha = 1
+                self.board.placePieces(at: self)
+            } else {
+                self.initialSetup()
             }
         }
         
@@ -96,22 +101,59 @@ class GameScene: SKScene {
         SCKManager.shared.getGameMovement { (move) in
             if let move = move {
                 self.canPlay.toggle()
+                
                 self.apply(move: move)
             }
         }
         
+        SCKManager.shared.socket.on("restart") { (_, _) in
+            self.restart()
+        }
+        
+    }
+    
+    func initialSetup() {
+        self.removeAllChildren()
+        winnerLabel.position = CGPoint(x: frame.midX, y: frame.maxY/1.25)
+        addChild(winnerLabel)
+
+        restartLabel.position = CGPoint(x: frame.minX/1.1, y: frame.maxY/1.25)
+        addChild(restartLabel)
+
+        quitLabel.position = CGPoint(x: frame.minX/1.1, y: frame.maxY/1.5)
+        addChild(quitLabel)
+        
+        self.board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
+
+        board.placeCells(at: self)
+    }
+    
+    func restart() {
+        self.initialSetup()
+        board.placePieces(at: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        guard canPlay == true else { return }
-        
         guard let position = touches.first?.location(in: self) else { return }
+        
+        if self.nodes(at: position).first == restartLabel {
+            SCKManager.shared.socket.emit("restart", true)
+            return
+        }
+        
+        if self.nodes(at: position).first == quitLabel {
+            SCKManager.shared.socket.emit("exit", self.player.nickname)
+            self.initialSetup()
+            return
+        }
+        
+        guard canPlay == true else { return }
         
         if selectedPiece != nil {
             if let destination = highlightedCells.first(where: { $0.node.contains(position)} ) {
                 let origin = board.cell(at: selectedPiece.position)
-                SCKManager.shared.send(movement: .init(nickname: nickname, from: origin!, to: destination))
+                SCKManager.shared.send(movement: .init(nickname: nickname!, from: origin!, to: destination))
                 selectedPiece = nil
                 clearHighlightedCell()
             }   

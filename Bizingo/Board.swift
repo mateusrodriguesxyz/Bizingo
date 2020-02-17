@@ -67,10 +67,13 @@ class Board {
         return self.pieces.first(where: { $0.contains(position)} )
     }
     
-    func placeNodes(at scene: SKScene) {
+    func placeCells(at scene: SKScene) {
         cells.forEach {
             scene.addChild($0.node)
         }
+    }
+    
+    func placePieces(at scene: SKScene) {
         pieces.forEach {
             scene.addChild($0)
         }
