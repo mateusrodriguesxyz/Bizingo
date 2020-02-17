@@ -38,6 +38,11 @@ io.on('connection', function(clientSocket) {
         break;
       }
     }
+
+    for (var i=0; i<players.length; i++) {
+        players[i]["number"] = i;
+    }
+
     io.emit("players", players);
     io.emit("userExitUpdate", clientNickname);
   });
