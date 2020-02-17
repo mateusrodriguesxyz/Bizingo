@@ -110,6 +110,16 @@ class GameScene: SKScene {
             self.restart()
         }
         
+        SCKManager.shared.socket.on("userExitUpdate") { (data, _) in
+            if let quitter = data[0] as? String, quitter != self.nickname {
+                self.canPlay = true
+                self.player.number = 0
+            } else {
+                self.canPlay = true
+                self.player.number = 1
+            }
+        }
+        
     }
     
     func initialSetup() {

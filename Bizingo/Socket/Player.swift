@@ -11,7 +11,7 @@ import Foundation
 struct Player: Hashable {
     
     let identifier = UUID()
-    let number: Int
+    var number: Int
     let nickname: String
     let isConnected: Bool
     
