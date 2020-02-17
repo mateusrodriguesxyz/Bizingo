@@ -11,10 +11,27 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
+    let label = SKLabelNode()
+    
+    let board = Board(contentsOf: Bundle.main.url(forResource: "board2", withExtension: "json")!)!
 
-    var red = 18
-    var blue = 18
+    var red = 1 {
+        didSet {
+            if red == 0 {
+                SCKManager.shared.socket.emit("end", 0)
+            }
+        }
+    }
+    
+    
+    var blue = 2 {
+        didSet {
+            if blue == 0 {
+                SCKManager.shared.socket.emit("end", 1)
+            }
+        }
+    }
+    
     
     var selectedPiece: Piece! = nil
     
@@ -32,6 +49,13 @@ class GameScene: SKScene {
         self.backgroundColor = .clear
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
+        self.alpha = 0.5
+        
+        label.fontSize = 50
+        label.position = CGPoint(x: frame.midX, y: frame.maxY/1.25)
+           
+        addChild(label)
+        
         board.placeNodes(at: self)
         
         SCKManager.shared.socket.on("userConnectUpdate") { (data, _) in
@@ -39,6 +63,23 @@ class GameScene: SKScene {
             if player.nickname == self.nickname {
                 self.player = player
                 self.canPlay = player.number == 0
+            }
+        }
+        
+        SCKManager.shared.socket.on("players") { (data, _) in
+            let players = (data[0] as? [[String: AnyObject]])?.map(Player.init)
+            if players?.count == 2 {
+                self.alpha = 1.0
+            }
+        }
+        
+        
+        SCKManager.shared.socket.on("winner") { (data, _) in
+            let winner = data[0] as! Int
+            if self.player.number == winner {
+                self.label.text = "YOU WON THE GAME!"
+            } else {
+                self.label.text = "YOU LOST THE GAME!"
             }
         }
         
@@ -123,14 +164,6 @@ class GameScene: SKScene {
                 }
                 
                 board.pieces.remove(at: i)
-                
-                if red == 0 {
-                   print("BLUE WON!")
-                }
-                
-                if blue == 0 {
-                   print("RED WON!")
-                }
                 
             }
             

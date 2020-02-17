@@ -34,8 +34,6 @@ class GameViewController: UIViewController {
         skView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         skView.ignoresSiblingOrder = true
-        skView.showsFPS = true
-        skView.showsNodeCount = true
         skView.allowsTransparency = true
         
         skView.presentScene(scene)

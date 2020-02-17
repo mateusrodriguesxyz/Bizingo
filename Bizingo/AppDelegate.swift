@@ -26,6 +26,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SCKManager.shared.closeConnection()
     }
 
-
 }
 

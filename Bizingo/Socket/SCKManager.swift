@@ -39,9 +39,9 @@ class SCKManager: NSObject {
         }
     }
     
-    func exitChat(with nickname: String, completionHandler: () -> Void) {
+    func exitChat(with nickname: String, completionHandler: (() -> Void)?) {
         socket.emit("exitUser", nickname)
-        completionHandler()
+        completionHandler?()
     }
     
     func send(message: String, with nickname: String) {
@@ -54,6 +54,13 @@ class SCKManager: NSObject {
         }
     }
     
+    func getGameMovement(completion: @escaping (Move?) -> Void) {
+        socket.on("newGameMovement") { (data, _) -> Void in
+            let movement = try? JSONDecoder().decode(Move.self, from: (data[0] as! Data))
+            completion(movement)
+        }
+    }
+    
     func getChatMessage(completion: @escaping (Message) -> Void) {
         socket.on("newChatMessage") { (data, _) -> Void in
             let message = Message(sender: data[0] as! String, content: data[1] as! String, date: data[2] as! String)
@@ -61,11 +68,6 @@ class SCKManager: NSObject {
         }
     }
     
-    func getGameMovement(completion: @escaping (Move?) -> Void) {
-        socket.on("newGameMovement") { (data, _) -> Void in
-            let movement = try? JSONDecoder().decode(Move.self, from: (data[0] as! Data))
-            completion(movement)
-        }
-    }
+    
 
 }
