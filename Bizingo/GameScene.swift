@@ -36,7 +36,7 @@ class GameScene: SKScene {
     var red = 18 {
         didSet {
             if red == 0 {
-                SCKManager.shared.socket.emit("end", 0)
+//                SCKManager.shared.socket.emit("end", 0)
             }
         }
     }
@@ -45,7 +45,7 @@ class GameScene: SKScene {
     var blue = 18 {
         didSet {
             if blue == 0 {
-                SCKManager.shared.socket.emit("end", 1)
+//                SCKManager.shared.socket.emit("end", 1)
             }
         }
     }
@@ -67,58 +67,59 @@ class GameScene: SKScene {
         self.backgroundColor = .clear
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        initialSetup()
+        NotificationCenter.default.addObserver(self, selector: #selector(start), name:  Notification.Name("start_game"), object: nil)
+    
         
-        SCKManager.shared.socket.on("userConnectUpdate") { (data, _) in
-            let player = Player(data: data[0] as! [String : AnyObject])
-            if player.nickname == self.nickname {
-                self.player = player
-                self.canPlay = player.number == 0
-            }
-        }
-        
-        SCKManager.shared.socket.on("players") { (data, _) in
-            let players = (data[0] as? [[String: AnyObject]])?.map(Player.init)
-            if players?.count == 2 {
-                self.restartLabel.alpha = 1
-                self.quitLabel.alpha = 1
-                self.board.placePieces(at: self)
-            } else {
-                self.initialSetup()
-            }
-        }
-        
-        
-        SCKManager.shared.socket.on("winner") { (data, _) in
-            let winner = data[0] as! Int
-            if self.player.number == winner {
-                self.winnerLabel.text = "YOU WON THE GAME!"
-            } else {
-                self.winnerLabel.text = "YOU LOST THE GAME!"
-            }
-        }
-        
-        SCKManager.shared.getGameMovement { (move) in
-            if let move = move {
-                self.canPlay.toggle()
-                
-                self.apply(move: move)
-            }
-        }
-        
-        SCKManager.shared.socket.on("restart") { (_, _) in
-            self.restart()
-        }
-        
-        SCKManager.shared.socket.on("userExitUpdate") { (data, _) in
-            if let quitter = data[0] as? String, quitter != self.nickname {
-                self.canPlay = true
-                self.player.number = 0
-            } else {
-                self.canPlay = true
-                self.player.number = 1
-            }
-        }
+//        SCKManager.shared.socket.on("userConnectUpdate") { (data, _) in
+//            let player = Player(data: data[0] as! [String : AnyObject])
+//            if player.nickname == self.nickname {
+//                self.player = player
+//                self.canPlay = player.number == 0
+//            }
+//        }
+//
+//        SCKManager.shared.socket.on("players") { (data, _) in
+//            let players = (data[0] as? [[String: AnyObject]])?.map(Player.init)
+//            if players?.count == 2 {
+//                self.restartLabel.alpha = 1
+//                self.quitLabel.alpha = 1
+//                self.board.placePieces(at: self)
+//            } else {
+//                self.initialSetup()
+//            }
+//        }
+//
+//
+//        SCKManager.shared.socket.on("winner") { (data, _) in
+//            let winner = data[0] as! Int
+//            if self.player.number == winner {
+//                self.winnerLabel.text = "YOU WON THE GAME!"
+//            } else {
+//                self.winnerLabel.text = "YOU LOST THE GAME!"
+//            }
+//        }
+//
+//        SCKManager.shared.getGameMovement { (move) in
+//            if let move = move {
+//                self.canPlay.toggle()
+//
+//                self.apply(move: move)
+//            }
+//        }
+//
+//        SCKManager.shared.socket.on("restart") { (_, _) in
+//            self.restart()
+//        }
+//
+//        SCKManager.shared.socket.on("userExitUpdate") { (data, _) in
+//            if let quitter = data[0] as? String, quitter != self.nickname {
+//                self.canPlay = true
+//                self.player.number = 0
+//            } else {
+//                self.canPlay = true
+//                self.player.number = 1
+//            }
+//        }
         
     }
     
@@ -138,8 +139,12 @@ class GameScene: SKScene {
         board.placeCells(at: self)
     }
     
-    func restart() {
+    @objc func start() {
+        let name = UserDefaults.standard.string(forKey: "name")!
+        let number = UserDefaults.standard.integer(forKey: "number")
+        self.player = Player(name: name, number: number, isConnected: true)
         self.initialSetup()
+        self.canPlay = true
         board.placePieces(at: self)
     }
     
@@ -148,12 +153,12 @@ class GameScene: SKScene {
         guard let position = touches.first?.location(in: self) else { return }
         
         if self.nodes(at: position).first == restartLabel {
-            SCKManager.shared.socket.emit("restart", true)
+//            SCKManager.shared.socket.emit("restart", true)
             return
         }
         
         if self.nodes(at: position).first == quitLabel {
-            SCKManager.shared.socket.emit("exit", self.player.nickname)
+//            SCKManager.shared.socket.emit("exit", self.player.nickname)
             self.initialSetup()
             return
         }
@@ -163,7 +168,7 @@ class GameScene: SKScene {
         if selectedPiece != nil {
             if let destination = highlightedCells.first(where: { $0.node.contains(position)} ) {
                 let origin = board.cell(at: selectedPiece.position)
-                SCKManager.shared.send(movement: .init(nickname: nickname!, from: origin!, to: destination))
+//                SCKManager.shared.send(movement: .init(nickname: nickname!, from: origin!, to: destination))
                 selectedPiece = nil
                 clearHighlightedCell()
             }   

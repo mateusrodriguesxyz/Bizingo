@@ -21,8 +21,8 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "MessageTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "message-cell")
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "message-cell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50.0
@@ -32,17 +32,17 @@ class ChatViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        SCKManager.shared.getChatMessage { (message) in
-            DispatchQueue.main.async {
-                self.messages.append(message)
-                self.tableView.reloadData()
-            }
-        }
+//        SCKManager.shared.getChatMessage { (message) in
+//            DispatchQueue.main.async {
+//                self.messages.append(message)
+//                self.tableView.reloadData()
+//            }
+//        }
     }
 
     @IBAction func send(_ sender: Any) {
         if !textField.text!.isEmpty, let message = textField.text {
-            SCKManager.shared.send(message: message, with: nickname)
+//            SCKManager.shared.send(message: message, with: nickname)
             textField.text = nil
             textField.resignFirstResponder()
         }
@@ -59,7 +59,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         let message = messages[indexPath.row]
         cell.messageLabel.text = message.content
         
-        let player = players.first { $0.nickname == message.sender }
+        let player = players.first { $0.name == message.sender }
         
         cell.balloonView.backgroundColor = player!.number == 0 ? .systemBlue : .systemRed
         

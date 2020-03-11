@@ -33,18 +33,19 @@ class PlayersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(UINib(nibName: "PlayerTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "player-cell")
         tableView.dataSource = self.dataSource
         tableView.separatorStyle = .none
         tableView.rowHeight = 50
         tableView.tableFooterView = UIView(frame: .zero)
         
-        SCKManager.shared.socket.on("userExitUpdate") { (data, _) in
-            if let quitter = data[0] as? String, quitter == self.nickname {
-                UserDefaults.standard.set(nil, forKey: "nickname")
-                self.button.setTitle("JOIN", for: .normal)
-            }
-        }
+//        SCKManager.shared.socket.on("userExitUpdate") { (data, _) in
+//            if let quitter = data[0] as? String, quitter == self.nickname {
+//                UserDefaults.standard.set(nil, forKey: "nickname")
+//                self.button.setTitle("JOIN", for: .normal)
+//            }
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -94,14 +95,14 @@ class PlayersViewController: UIViewController {
             let textfield = alert.textFields![0]
             UserDefaults.standard.set(textfield.text, forKey: "nickname")
             self.button.setTitle("CHAT", for: .normal)
-            SCKManager.shared.connectToServer(with: self.nickname!) { (players) in
-                DispatchQueue.main.async {
-                    if let players = players {
-                        self.players = players
-                        self.update(with: players)
-                    }
-                }
-            }
+//            SCKManager.shared.connectToServer(with: self.nickname!) { (players) in
+//                DispatchQueue.main.async {
+//                    if let players = players {
+//                        self.players = players
+//                        self.update(with: players)
+//                    }
+//                }
+//            }
         }
         
         action.isEnabled = false

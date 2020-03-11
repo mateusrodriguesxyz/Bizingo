@@ -146,6 +146,88 @@
             </objects>
             <point key="canvasLocation" x="1786.9565217391305" y="112.5"/>
         </scene>
+        <!--Join View Controller-->
+        <scene sceneID="t87-dw-D0b">
+            <objects>
+                <viewController storyboardIdentifier="join-controller" id="37A-GJ-nAO" customClass="JoinViewController" customModule="Bizingo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FcL-gQ-tKx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PLE-8j-tOP">
+                                <rect key="frame" x="147" y="359" width="120" height="188.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PORT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1P-uP-J95">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S3D-zB-uMH">
+                                        <rect key="frame" x="0.0" y="30.5" width="120" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Oponent Port" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Phm-va-eGw">
+                                        <rect key="frame" x="0.0" y="74.5" width="120" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndE-Xo-FTM">
+                                        <rect key="frame" x="0.0" y="118.5" width="120" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="DR4-se-L7V"/>
+                                            <constraint firstAttribute="width" constant="120" id="mqJ-BU-DuT"/>
+                                        </constraints>
+                                        <state key="normal" title="INVITE TO PLAY">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="invite:" destination="37A-GJ-nAO" eventType="touchUpInside" id="N9b-xs-3Nj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ZK-yZ-NQZ">
+                                        <rect key="frame" x="0.0" y="158.5" width="120" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="START">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="start:" destination="37A-GJ-nAO" eventType="touchUpInside" id="CTw-Wp-XGR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="PLE-8j-tOP" firstAttribute="centerY" secondItem="tqA-Ze-MRp" secondAttribute="centerY" id="sly-0L-HfF"/>
+                            <constraint firstItem="PLE-8j-tOP" firstAttribute="centerX" secondItem="tqA-Ze-MRp" secondAttribute="centerX" id="xIP-eG-XpR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tqA-Ze-MRp"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="S3D-zB-uMH" id="Vus-bi-oFs"/>
+                        <outlet property="portLabel" destination="S1P-uP-J95" id="LBo-P4-gKs"/>
+                        <outlet property="portTextField" destination="Phm-va-eGw" id="xBB-kf-Bsy"/>
+                        <outlet property="startButton" destination="6ZK-yZ-NQZ" id="TXR-s0-NpY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zj5-Mw-j73" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2598.5507246376815" y="110.49107142857143"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow.up.circle.fill" catalog="system" width="64" height="60"/>

@@ -15,22 +15,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UserDefaults.standard.set(nil, forKey: "nickname")
+        DispatchQueue.global().async {
+            RPCManager.shared.server.start()
+        }
+        UserDefaults.standard.set(nil, forKey: "name")
+        UserDefaults.standard.set(nil, forKey: "number")
         return true
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        SCKManager.shared.establishConnection()
+//        SCKManager.shared.establishConnection()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        SCKManager.shared.closeConnection()
+//        SCKManager.shared.closeConnection()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        if let nickname = UserDefaults.standard.string(forKey: "nickname") {
-            SCKManager.shared.exit(with: nickname, completionHandler: nil)
-        }
+//        if let nickname = UserDefaults.standard.string(forKey: "nickname") {
+//            SCKManager.shared.exit(with: nickname, completionHandler: nil)
+//        }
     }
 
 }

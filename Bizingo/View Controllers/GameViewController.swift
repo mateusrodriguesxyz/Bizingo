@@ -49,7 +49,7 @@ class GameViewController: UIViewController {
         uiView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         uiView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
         
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "players-controller")
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "join-controller")
         self.addChild(controller)
         controller.view.translatesAutoresizingMaskIntoConstraints = false
         self.uiView.addSubview(controller.view)
