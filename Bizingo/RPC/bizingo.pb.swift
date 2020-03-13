@@ -79,6 +79,36 @@ struct Bizingo_StartReply {
   init() {}
 }
 
+struct Bizingo_MoveRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var fromRow: Int32 = 0
+
+  var fromColumn: Int32 = 0
+
+  var toRow: Int32 = 0
+
+  var toColumn: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Bizingo_MoveReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var success: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "bizingo"
@@ -183,6 +213,82 @@ extension Bizingo_StartReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 
   static func ==(lhs: Bizingo_StartReply, rhs: Bizingo_StartReply) -> Bool {
+    if lhs.success != rhs.success {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Bizingo_MoveRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MoveRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "fromRow"),
+    2: .same(proto: "fromColumn"),
+    3: .same(proto: "toRow"),
+    4: .same(proto: "toColumn"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularInt32Field(value: &self.fromRow)
+      case 2: try decoder.decodeSingularInt32Field(value: &self.fromColumn)
+      case 3: try decoder.decodeSingularInt32Field(value: &self.toRow)
+      case 4: try decoder.decodeSingularInt32Field(value: &self.toColumn)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.fromRow != 0 {
+      try visitor.visitSingularInt32Field(value: self.fromRow, fieldNumber: 1)
+    }
+    if self.fromColumn != 0 {
+      try visitor.visitSingularInt32Field(value: self.fromColumn, fieldNumber: 2)
+    }
+    if self.toRow != 0 {
+      try visitor.visitSingularInt32Field(value: self.toRow, fieldNumber: 3)
+    }
+    if self.toColumn != 0 {
+      try visitor.visitSingularInt32Field(value: self.toColumn, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Bizingo_MoveRequest, rhs: Bizingo_MoveRequest) -> Bool {
+    if lhs.fromRow != rhs.fromRow {return false}
+    if lhs.fromColumn != rhs.fromColumn {return false}
+    if lhs.toRow != rhs.toRow {return false}
+    if lhs.toColumn != rhs.toColumn {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Bizingo_MoveReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MoveReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "success"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBoolField(value: &self.success)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.success != false {
+      try visitor.visitSingularBoolField(value: self.success, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Bizingo_MoveReply, rhs: Bizingo_MoveReply) -> Bool {
     if lhs.success != rhs.success {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

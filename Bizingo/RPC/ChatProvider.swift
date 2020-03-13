@@ -10,6 +10,17 @@ import GRPC
 import NIO
 
 class GameProvider: Bizingo_GameProvider {
+    func move(request: Bizingo_MoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MoveReply> {
+        let from = Move.Coordinate(row: Int(request.fromRow), column: Int(request.fromColumn))
+        let to = Move.Coordinate(row: Int(request.toRow), column: Int(request.toColumn))
+        let move = Move(from: from, to: to)
+        RPCManager.shared.onMove?(move)
+        let response = Bizingo_MoveReply.with {
+            $0.success = true
+        }
+        return context.eventLoop.makeSucceededFuture(response)
+    }
+    
     
     func start(request: Bizingo_StartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_StartReply> {
         RPCManager.shared.onStart?()

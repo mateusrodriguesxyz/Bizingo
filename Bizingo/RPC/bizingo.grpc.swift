@@ -31,6 +31,7 @@ import SwiftProtobuf
 internal protocol Bizingo_GameService {
   func invite(_ request: Bizingo_InviteRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_InviteRequest, Bizingo_InviteReply>
   func start(_ request: Bizingo_StartRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_StartRequest, Bizingo_StartReply>
+  func move(_ request: Bizingo_MoveRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_MoveRequest, Bizingo_MoveReply>
 }
 
 internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService {
@@ -71,12 +72,25 @@ internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService 
                               callOptions: callOptions ?? self.defaultCallOptions)
   }
 
+  /// Asynchronous unary call to Move.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Move.
+  ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func move(_ request: Bizingo_MoveRequest, callOptions: CallOptions? = nil) -> UnaryCall<Bizingo_MoveRequest, Bizingo_MoveReply> {
+    return self.makeUnaryCall(path: "/bizingo.Game/Move",
+                              request: request,
+                              callOptions: callOptions ?? self.defaultCallOptions)
+  }
+
 }
 
 /// To build a server, implement a class that conforms to this protocol.
 internal protocol Bizingo_GameProvider: CallHandlerProvider {
   func invite(request: Bizingo_InviteRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_InviteReply>
   func start(request: Bizingo_StartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_StartReply>
+  func move(request: Bizingo_MoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MoveReply>
 }
 
 extension Bizingo_GameProvider {
@@ -97,6 +111,13 @@ extension Bizingo_GameProvider {
       return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
         return { request in
           self.start(request: request, context: context)
+        }
+      }
+
+    case "Move":
+      return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
+        return { request in
+          self.move(request: request, context: context)
         }
       }
 

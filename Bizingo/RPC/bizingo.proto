@@ -22,18 +22,32 @@ package bizingo;
 service Game {
     rpc Invite (InviteRequest) returns (InviteReply) {}
     rpc Start (StartRequest) returns (StartReply) {}
+    rpc Move (MoveRequest) returns (MoveReply) {}
 }
 
 message InviteRequest {
-  string name = 1;
+    string name = 1;
 }
 
 message InviteReply {
-  bool success = 1;
+    bool success = 1;
 }
 
 message StartRequest { }
 
 message StartReply {
-  bool success = 1;
+    bool success = 1;
+}
+
+message MoveRequest {
+    int32 fromRow = 1;
+    int32 fromColumn = 2;
+    int32 toRow = 3;
+    int32 toColumn = 4;
+    
+}
+
+
+message MoveReply {
+    bool success = 1;
 }

@@ -25,8 +25,6 @@ class JoinViewController: UIViewController {
             NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
         }
         
-//        startButton.isHidden = true
-        
         portLabel.text = String(RPCManager.shared.server.port!)
         
     }
@@ -42,6 +40,8 @@ class JoinViewController: UIViewController {
         RPCManager.shared.client.invite(name: name) { (success) in
             if success {
                 UserDefaults.standard.set(name, forKey: "name")
+                nameTextField.isEnabled = false
+                portTextField.isEnabled = false
                 sender.backgroundColor = .systemGreen
                 sender.setTitle("ACCEPTED", for: .normal)
             }

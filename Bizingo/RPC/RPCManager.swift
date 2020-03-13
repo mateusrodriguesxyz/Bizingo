@@ -19,6 +19,8 @@ class RPCManager {
     
     var onStart: (() -> ())?
     
+    var onMove: ((Move) -> ())?
+    
     private init() {} 
     
 }

@@ -67,5 +67,35 @@ class BizingoClient {
         
     }
     
+    func send(_ move: Move, onResponse: (Bool) -> ()) {
+        
+        let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+
+        defer {
+          try! group.syncShutdownGracefully()
+        }
+
+        let configuration = ClientConnection.Configuration(target: .hostAndPort("localhost", port ?? 0), eventLoopGroup: group)
+
+        let connection = ClientConnection(configuration: configuration)
+
+        let service = Bizingo_GameServiceClient(connection: connection)
+        
+        let request = Bizingo_MoveRequest.with {
+            $0.fromColumn = Int32(move.from.column)
+            $0.fromRow = Int32(move.from.row)
+            $0.toColumn = Int32(move.to.column)
+            $0.toRow = Int32(move.to.row)
+        }
+
+        do {
+            let response = try service.move(request).response.wait()
+            onResponse(response.success)
+        } catch {
+            print("Failed: \(error)")
+        }
+        
+    }
+    
     
 }

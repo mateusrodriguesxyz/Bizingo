@@ -68,6 +68,8 @@ class GameScene: SKScene {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         NotificationCenter.default.addObserver(self, selector: #selector(start), name:  Notification.Name("start_game"), object: nil)
+        
+        RPCManager.shared.onMove = { self.apply(move: $0) }
     
         
 //        SCKManager.shared.socket.on("userConnectUpdate") { (data, _) in
@@ -168,6 +170,10 @@ class GameScene: SKScene {
         if selectedPiece != nil {
             if let destination = highlightedCells.first(where: { $0.node.contains(position)} ) {
                 let origin = board.cell(at: selectedPiece.position)
+                let move = Move(from: origin!, to: destination)
+                RPCManager.shared.client.send(move) { (success) in
+                    self.apply(move: move)
+                }
 //                SCKManager.shared.send(movement: .init(nickname: nickname!, from: origin!, to: destination))
                 selectedPiece = nil
                 clearHighlightedCell()

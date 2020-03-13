@@ -10,7 +10,6 @@ import Foundation
 
 struct Move: Codable {
     
-    var nickname: String
     var from: Coordinate
     var to: Coordinate
     
@@ -23,8 +22,7 @@ struct Move: Codable {
 
 extension Move {
     
-    init(nickname: String, from: Cell, to: Cell) {
-        self.nickname = nickname
+    init(from: Cell, to: Cell) {
         self.from = Coordinate(row: from.row, column: from.column)
         self.to = Coordinate(row: to.row, column: to.column)
     }
