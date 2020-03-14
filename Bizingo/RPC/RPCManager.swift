@@ -16,11 +16,15 @@ class RPCManager {
     var server = BizingoServer()
     
     var hasOpponent = false
+
+    private init() {}
     
-    var onStart: (() -> ())?
+    public func onStart(handler: @escaping () -> ()) {
+        server.provider.onStart = handler
+    }
     
-    var onMove: ((Move) -> ())?
-    
-    private init() {} 
+    public func onMove(handler: @escaping (Move) -> ()) {
+        server.provider.onMove = handler
+    }
     
 }

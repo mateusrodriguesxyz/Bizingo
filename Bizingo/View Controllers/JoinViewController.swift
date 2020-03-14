@@ -20,7 +20,7 @@ class JoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        RPCManager.shared.onStart = {
+        RPCManager.shared.onStart {
             UserDefaults.standard.set(1, forKey: "number")
             NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
         }

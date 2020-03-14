@@ -69,8 +69,9 @@ class GameScene: SKScene {
         
         NotificationCenter.default.addObserver(self, selector: #selector(start), name:  Notification.Name("start_game"), object: nil)
         
-        RPCManager.shared.onMove = { self.apply(move: $0) }
-    
+        RPCManager.shared.onMove {
+            self.apply(move: $0)
+        }
         
 //        SCKManager.shared.socket.on("userConnectUpdate") { (data, _) in
 //            let player = Player(data: data[0] as! [String : AnyObject])
