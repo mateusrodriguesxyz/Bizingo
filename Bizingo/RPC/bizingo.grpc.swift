@@ -31,6 +31,7 @@ import SwiftProtobuf
 internal protocol Bizingo_GameService {
   func invite(_ request: Bizingo_InviteRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_InviteRequest, Bizingo_InviteReply>
   func start(_ request: Bizingo_StartRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_StartRequest, Bizingo_StartReply>
+  func end(_ request: Bizingo_EndRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_EndRequest, Bizingo_EndReply>
   func move(_ request: Bizingo_MoveRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_MoveRequest, Bizingo_MoveReply>
 }
 
@@ -72,6 +73,18 @@ internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService 
                               callOptions: callOptions ?? self.defaultCallOptions)
   }
 
+  /// Asynchronous unary call to End.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to End.
+  ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func end(_ request: Bizingo_EndRequest, callOptions: CallOptions? = nil) -> UnaryCall<Bizingo_EndRequest, Bizingo_EndReply> {
+    return self.makeUnaryCall(path: "/bizingo.Game/End",
+                              request: request,
+                              callOptions: callOptions ?? self.defaultCallOptions)
+  }
+
   /// Asynchronous unary call to Move.
   ///
   /// - Parameters:
@@ -90,6 +103,7 @@ internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService 
 internal protocol Bizingo_GameProvider: CallHandlerProvider {
   func invite(request: Bizingo_InviteRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_InviteReply>
   func start(request: Bizingo_StartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_StartReply>
+  func end(request: Bizingo_EndRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_EndReply>
   func move(request: Bizingo_MoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MoveReply>
 }
 
@@ -111,6 +125,13 @@ extension Bizingo_GameProvider {
       return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
         return { request in
           self.start(request: request, context: context)
+        }
+      }
+
+    case "End":
+      return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
+        return { request in
+          self.end(request: request, context: context)
         }
       }
 

@@ -64,22 +64,30 @@ class BizingoClient {
         
     }
     
-    func send(_ move: Move, onResponse: (Bool) -> ()) {
+    func end(onResponse: (Bool) -> ()) {
         
-        let request = Bizingo_MoveRequest.with {
-            $0.from.row = Int32(move.from.row)
-            $0.from.column = Int32(move.from.column)
-            $0.to.row = Int32(move.to.row)
-            $0.to.column = Int32(move.to.column)
+        let request = Bizingo_EndRequest.with {
+            $0.winner = UserDefaults.standard.string(forKey: "name")!
         }
 
         do {
-            let response = try service.move(request).response.wait()
+            let response = try service.end(request).response.wait()
             onResponse(response.success)
         } catch {
             print("Failed: \(error)")
         }
         
+    }
+    
+    func send(_ move: Move, onResponse: (Bool) -> ()) {
+        do {
+            let data = try JSONEncoder().encode(move)
+            let request = try Bizingo_MoveRequest(jsonUTF8Data: data)
+            let response = try service.move(request).response.wait()
+            onResponse(response.success)
+        } catch {
+            print("Failed: \(error)")
+        }
     }
     
     

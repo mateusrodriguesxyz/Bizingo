@@ -28,6 +28,10 @@ class RPCManager {
         server.provider.onStart = handler
     }
     
+    public func onEnd(handler: @escaping (String) -> ()) {
+        server.provider.onEnd = handler
+    }
+    
     public func onMove(handler: @escaping (Move) -> ()) {
         server.provider.onMove = handler
     }
