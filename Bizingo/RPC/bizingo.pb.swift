@@ -84,17 +84,57 @@ struct Bizingo_MoveRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var fromRow: Int32 = 0
+  var from: Bizingo_MoveRequest.FROM {
+    get {return _storage._from ?? Bizingo_MoveRequest.FROM()}
+    set {_uniqueStorage()._from = newValue}
+  }
+  /// Returns true if `from` has been explicitly set.
+  var hasFrom: Bool {return _storage._from != nil}
+  /// Clears the value of `from`. Subsequent reads from it will return its default value.
+  mutating func clearFrom() {_uniqueStorage()._from = nil}
 
-  var fromColumn: Int32 = 0
-
-  var toRow: Int32 = 0
-
-  var toColumn: Int32 = 0
+  var to: Bizingo_MoveRequest.TO {
+    get {return _storage._to ?? Bizingo_MoveRequest.TO()}
+    set {_uniqueStorage()._to = newValue}
+  }
+  /// Returns true if `to` has been explicitly set.
+  var hasTo: Bool {return _storage._to != nil}
+  /// Clears the value of `to`. Subsequent reads from it will return its default value.
+  mutating func clearTo() {_uniqueStorage()._to = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
+  struct FROM {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    var row: Int32 = 0
+
+    var column: Int32 = 0
+
+    var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    init() {}
+  }
+
+  struct TO {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    var row: Int32 = 0
+
+    var column: Int32 = 0
+
+    var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    init() {}
+  }
+
   init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 struct Bizingo_MoveReply {
@@ -222,45 +262,137 @@ extension Bizingo_StartReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 extension Bizingo_MoveRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".MoveRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "fromRow"),
-    2: .same(proto: "fromColumn"),
-    3: .same(proto: "toRow"),
-    4: .same(proto: "toColumn"),
+    1: .same(proto: "from"),
+    2: .same(proto: "to"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _from: Bizingo_MoveRequest.FROM? = nil
+    var _to: Bizingo_MoveRequest.TO? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _from = source._from
+      _to = source._to
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._from)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._to)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._from {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if let v = _storage._to {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Bizingo_MoveRequest, rhs: Bizingo_MoveRequest) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._from != rhs_storage._from {return false}
+        if _storage._to != rhs_storage._to {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Bizingo_MoveRequest.FROM: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = Bizingo_MoveRequest.protoMessageName + ".FROM"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    3: .same(proto: "row"),
+    4: .same(proto: "column"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt32Field(value: &self.fromRow)
-      case 2: try decoder.decodeSingularInt32Field(value: &self.fromColumn)
-      case 3: try decoder.decodeSingularInt32Field(value: &self.toRow)
-      case 4: try decoder.decodeSingularInt32Field(value: &self.toColumn)
+      case 3: try decoder.decodeSingularInt32Field(value: &self.row)
+      case 4: try decoder.decodeSingularInt32Field(value: &self.column)
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.fromRow != 0 {
-      try visitor.visitSingularInt32Field(value: self.fromRow, fieldNumber: 1)
+    if self.row != 0 {
+      try visitor.visitSingularInt32Field(value: self.row, fieldNumber: 3)
     }
-    if self.fromColumn != 0 {
-      try visitor.visitSingularInt32Field(value: self.fromColumn, fieldNumber: 2)
-    }
-    if self.toRow != 0 {
-      try visitor.visitSingularInt32Field(value: self.toRow, fieldNumber: 3)
-    }
-    if self.toColumn != 0 {
-      try visitor.visitSingularInt32Field(value: self.toColumn, fieldNumber: 4)
+    if self.column != 0 {
+      try visitor.visitSingularInt32Field(value: self.column, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Bizingo_MoveRequest, rhs: Bizingo_MoveRequest) -> Bool {
-    if lhs.fromRow != rhs.fromRow {return false}
-    if lhs.fromColumn != rhs.fromColumn {return false}
-    if lhs.toRow != rhs.toRow {return false}
-    if lhs.toColumn != rhs.toColumn {return false}
+  static func ==(lhs: Bizingo_MoveRequest.FROM, rhs: Bizingo_MoveRequest.FROM) -> Bool {
+    if lhs.row != rhs.row {return false}
+    if lhs.column != rhs.column {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Bizingo_MoveRequest.TO: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = Bizingo_MoveRequest.protoMessageName + ".TO"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    5: .same(proto: "row"),
+    6: .same(proto: "column"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 5: try decoder.decodeSingularInt32Field(value: &self.row)
+      case 6: try decoder.decodeSingularInt32Field(value: &self.column)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.row != 0 {
+      try visitor.visitSingularInt32Field(value: self.row, fieldNumber: 5)
+    }
+    if self.column != 0 {
+      try visitor.visitSingularInt32Field(value: self.column, fieldNumber: 6)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Bizingo_MoveRequest.TO, rhs: Bizingo_MoveRequest.TO) -> Bool {
+    if lhs.row != rhs.row {return false}
+    if lhs.column != rhs.column {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

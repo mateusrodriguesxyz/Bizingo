@@ -19,13 +19,21 @@ class JoinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        RPCManager.shared.run { (port) in
+            DispatchQueue.main.async {
+                self.portLabel.text = String(port)
+            }
+        }
         
         RPCManager.shared.onStart {
+            DispatchQueue.main.async {
+                self.startButton.isEnabled = false
+                self.startButton.alpha = 0.5
+            }
             UserDefaults.standard.set(1, forKey: "number")
             NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
         }
-        
-        portLabel.text = String(RPCManager.shared.server.port!)
         
     }
 
@@ -50,15 +58,10 @@ class JoinViewController: UIViewController {
         
     }
     @IBAction func start(_ sender: UIButton) {
-        
-        let name = portTextField.text!
-        
-        guard let port = Int(portTextField.text!) else { return }
-        
-        RPCManager.shared.client.port = port
-        
         RPCManager.shared.client.start { (success) in
             if success {
+                self.startButton.isEnabled = false
+                self.startButton.alpha = 0.5
                 UserDefaults.standard.set(0, forKey: "number")
                 NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
             }

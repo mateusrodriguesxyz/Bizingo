@@ -55,10 +55,6 @@ class GameScene: SKScene {
     
     var highlightedCells: [Cell] = []
     
-    var nickname: String? {
-        return UserDefaults.standard.string(forKey: "nickname")
-    }
-    
     var player: Player!
     
     var canPlay: Bool!
@@ -175,7 +171,6 @@ class GameScene: SKScene {
                 RPCManager.shared.client.send(move) { (success) in
                     self.apply(move: move)
                 }
-//                SCKManager.shared.send(movement: .init(nickname: nickname!, from: origin!, to: destination))
                 selectedPiece = nil
                 clearHighlightedCell()
             }   

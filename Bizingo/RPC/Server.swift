@@ -17,7 +17,9 @@ class BizingoServer {
     
     var provider = GameProvider()
     
-    func start() {
+    var onRun: ((Int) -> ())?
+    
+    func run() {
         
         LoggingSystem.bootstrap {
           var handler = StreamLogHandler.standardOutput(label: $0)
@@ -41,8 +43,11 @@ class BizingoServer {
                 $0.channel.localAddress
             }
             .whenSuccess { address in
-                self.port = address!.port
-                print("server started on port \(address!.port!)")
+                if let port = address?.port {
+                    self.port = port
+                    self.onRun?(port)
+                    print("server started on port \(port)")
+                }
             }
         
         try? server.flatMap { $0.onClose }.wait()

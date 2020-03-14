@@ -14,10 +14,15 @@ class RPCManager {
     
     var client = BizingoClient()
     var server = BizingoServer()
-    
-    var hasOpponent = false
 
     private init() {}
+    
+    public func run(handler: @escaping (Int) -> ()) {
+        server.onRun = handler
+        DispatchQueue.global().async {
+            self.server.run()
+        }
+    }
     
     public func onStart(handler: @escaping () -> ()) {
         server.provider.onStart = handler

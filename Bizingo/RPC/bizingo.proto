@@ -40,12 +40,29 @@ message StartReply {
 }
 
 message MoveRequest {
-    int32 fromRow = 1;
-    int32 fromColumn = 2;
-    int32 toRow = 3;
-    int32 toColumn = 4;
     
+    FROM from = 1;
+    TO to = 2;
+
+    message FROM {
+        int32 row = 3;
+        int32 column = 4;
+    }
+    
+    message TO {
+        int32 row = 5;
+        int32 column = 6;
+    }
+
 }
+
+//message MoveRequest {
+//    int32 fromRow = 1;
+//    int32 fromColumn = 2;
+//    int32 toRow = 3;
+//    int32 toColumn = 4;
+//
+//}
 
 
 message MoveReply {

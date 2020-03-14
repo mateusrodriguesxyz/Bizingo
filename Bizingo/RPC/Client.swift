@@ -13,22 +13,31 @@ import Logging
 
 class BizingoClient {
     
-    var port: Int?
+    var port: Int!
+    
+    private var group: MultiThreadedEventLoopGroup!
+    
+    lazy var service: Bizingo_GameServiceClient = {
+        let target = ConnectionTarget.hostAndPort("localhost", port)
+        let configuration = ClientConnection.Configuration(target: target, eventLoopGroup: group)
+        let connection = ClientConnection(configuration: configuration)
+        return Bizingo_GameServiceClient(connection: connection)
+    }()
+    
+    init() {
+        group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+    }
+    
+    deinit {
+        do {
+            try group.syncShutdownGracefully()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
     func invite(name: String, onResponse: (Bool) -> ()) {
-        
-        let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 
-        defer {
-          try! group.syncShutdownGracefully()
-        }
-
-        let configuration = ClientConnection.Configuration(target: .hostAndPort("localhost", port ?? 0), eventLoopGroup: group)
-
-        let connection = ClientConnection(configuration: configuration)
-
-        let service = Bizingo_GameServiceClient(connection: connection)
-        
         let request = Bizingo_InviteRequest.with {
               $0.name = name
           }
@@ -44,18 +53,6 @@ class BizingoClient {
     
     func start(onResponse: (Bool) -> ()) {
         
-        let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-
-        defer {
-          try! group.syncShutdownGracefully()
-        }
-
-        let configuration = ClientConnection.Configuration(target: .hostAndPort("localhost", port ?? 0), eventLoopGroup: group)
-
-        let connection = ClientConnection(configuration: configuration)
-
-        let service = Bizingo_GameServiceClient(connection: connection)
-        
         let request = Bizingo_StartRequest.with { _ in }
 
         do {
@@ -69,23 +66,11 @@ class BizingoClient {
     
     func send(_ move: Move, onResponse: (Bool) -> ()) {
         
-        let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-
-        defer {
-          try! group.syncShutdownGracefully()
-        }
-
-        let configuration = ClientConnection.Configuration(target: .hostAndPort("localhost", port ?? 0), eventLoopGroup: group)
-
-        let connection = ClientConnection(configuration: configuration)
-
-        let service = Bizingo_GameServiceClient(connection: connection)
-        
         let request = Bizingo_MoveRequest.with {
-            $0.fromColumn = Int32(move.from.column)
-            $0.fromRow = Int32(move.from.row)
-            $0.toColumn = Int32(move.to.column)
-            $0.toRow = Int32(move.to.row)
+            $0.from.row = Int32(move.from.row)
+            $0.from.column = Int32(move.from.column)
+            $0.to.row = Int32(move.to.row)
+            $0.to.column = Int32(move.to.column)
         }
 
         do {
