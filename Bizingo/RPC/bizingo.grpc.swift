@@ -32,6 +32,7 @@ internal protocol Bizingo_GameService {
   func invite(_ request: Bizingo_InviteRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_InviteRequest, Bizingo_InviteReply>
   func start(_ request: Bizingo_StartRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_StartRequest, Bizingo_StartReply>
   func end(_ request: Bizingo_EndRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_EndRequest, Bizingo_EndReply>
+  func quit(_ request: Bizingo_QuitRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_QuitRequest, Bizingo_QuitReply>
   func move(_ request: Bizingo_MoveRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_MoveRequest, Bizingo_MoveReply>
   func message(_ request: Bizingo_MessageRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_MessageRequest, Bizingo_MessageReply>
 }
@@ -86,6 +87,18 @@ internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService 
                               callOptions: callOptions ?? self.defaultCallOptions)
   }
 
+  /// Asynchronous unary call to Quit.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Quit.
+  ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func quit(_ request: Bizingo_QuitRequest, callOptions: CallOptions? = nil) -> UnaryCall<Bizingo_QuitRequest, Bizingo_QuitReply> {
+    return self.makeUnaryCall(path: "/bizingo.Game/Quit",
+                              request: request,
+                              callOptions: callOptions ?? self.defaultCallOptions)
+  }
+
   /// Asynchronous unary call to Move.
   ///
   /// - Parameters:
@@ -117,6 +130,7 @@ internal protocol Bizingo_GameProvider: CallHandlerProvider {
   func invite(request: Bizingo_InviteRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_InviteReply>
   func start(request: Bizingo_StartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_StartReply>
   func end(request: Bizingo_EndRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_EndReply>
+  func quit(request: Bizingo_QuitRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_QuitReply>
   func move(request: Bizingo_MoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MoveReply>
   func message(request: Bizingo_MessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MessageReply>
 }
@@ -146,6 +160,13 @@ extension Bizingo_GameProvider {
       return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
         return { request in
           self.end(request: request, context: context)
+        }
+      }
+
+    case "Quit":
+      return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
+        return { request in
+          self.quit(request: request, context: context)
         }
       }
 

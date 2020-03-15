@@ -49,8 +49,7 @@ class JoinViewController: UIViewController {
                 sender.backgroundColor = .systemGreen
                 sender.setTitle("CONNECTED", for: .normal)
             }
-        }
-        
+        }    
         
     }
     
@@ -66,10 +65,10 @@ class JoinViewController: UIViewController {
     private func start() {
         DispatchQueue.main.async {
             
-            NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
-            
             self.startButton.isEnabled = false
             self.startButton.alpha = 0.5
+            
+            NotificationCenter.default.post(name: .start, object: nil)
             
             let chat = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chat-controller") as! ChatViewController
             

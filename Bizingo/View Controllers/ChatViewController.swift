@@ -17,6 +17,8 @@ class ChatViewController: UIViewController {
     
     var messages = [Message]()
     
+    private var observer: NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +28,9 @@ class ChatViewController: UIViewController {
         tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(quit), name: .quit, object: nil)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,6 +56,18 @@ class ChatViewController: UIViewController {
             textField.resignFirstResponder()
         }
     }
+    
+    @objc func quit() {
+        DispatchQueue.main.async {
+            let join = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "join-controller")
+            join.view.frame = self.view.bounds
+            self.view.addSubview(join.view)
+            UIView.transition(from: self.view, to: join.view, duration: 0.25, options: .transitionCrossDissolve) { _ in
+                join.didMove(toParent: self)
+            }
+        }
+    }
+    
 }
 
 extension ChatViewController: UITableViewDataSource, UITableViewDelegate {

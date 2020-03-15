@@ -23,6 +23,7 @@ service Game {
     rpc Invite (InviteRequest) returns (InviteReply) {}
     rpc Start (StartRequest) returns (StartReply) {}
     rpc End (EndRequest) returns (EndReply) {}
+    rpc Quit (QuitRequest) returns (QuitReply) {}
     rpc Move (MoveRequest) returns (MoveReply) {}
     rpc Message (MessageRequest) returns (MessageReply) {}
 }
@@ -52,6 +53,14 @@ message EndRequest {
 }
 
 message EndReply {
+    bool success = 1;
+}
+
+// Quit
+
+message QuitRequest { }
+
+message QuitReply {
     bool success = 1;
 }
 

@@ -19,6 +19,10 @@ class RPCManager {
     private init() {}
     
     public func run(handler: @escaping (Int) -> ()) {
+        guard !server.isRunning else {
+            handler(server.port!)
+            return
+        }
         server.onRun = handler
         DispatchQueue.global().async {
             self.server.run()
@@ -31,6 +35,10 @@ class RPCManager {
     
     public func onEnd(handler: @escaping (String) -> ()) {
         server.provider.onEnd = handler
+    }
+    
+    public func onQuit(handler: @escaping () -> ()) {
+        server.provider.onQuit = handler
     }
     
     public func onMove(handler: @escaping (Move) -> ()) {

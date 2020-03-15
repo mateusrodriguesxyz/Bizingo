@@ -12,11 +12,13 @@ import NIO
 
 class GameProvider: Bizingo_GameProvider {
     
-    var onInvite: ((Move) -> ())?
+    var onInvite: (() -> ())?
     
     var onStart: (() -> ())?
     
     var onEnd: ((String) -> ())?
+    
+    var onQuit: (() -> ())?
     
     var onMove: ((Move) -> ())?
     
@@ -42,6 +44,12 @@ class GameProvider: Bizingo_GameProvider {
         return context.eventLoop.makeSucceededFuture(response)
     }
     
+    func invite(request: Bizingo_InviteRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_InviteReply> {
+        let response = Bizingo_InviteReply.with {
+            $0.success = true
+        }
+        return context.eventLoop.makeSucceededFuture(response)
+    }
     
     func start(request: Bizingo_StartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_StartReply> {
         self.onStart?()
@@ -60,9 +68,9 @@ class GameProvider: Bizingo_GameProvider {
         return context.eventLoop.makeSucceededFuture(response)
     }
     
-    
-    func invite(request: Bizingo_InviteRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_InviteReply> {
-        let response = Bizingo_InviteReply.with {
+    func quit(request: Bizingo_QuitRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_QuitReply> {
+        self.onQuit?()
+        let response = Bizingo_QuitReply.with {
             $0.success = true
         }
         return context.eventLoop.makeSucceededFuture(response)

@@ -59,10 +59,15 @@ class GameScene: SKScene {
         self.backgroundColor = .clear
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(start), name:  Notification.Name("start_game"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(start), name: .start, object: nil)
         
         RPCManager.shared.onEnd { (winner) in
             self.winnerLabel.text = "YOU LOST THE GAME!"
+        }
+        
+        RPCManager.shared.onQuit {
+            self.removeAllChildren()
+            NotificationCenter.default.post(name: .quit, object: nil)
         }
         
         RPCManager.shared.onMove {
@@ -85,6 +90,9 @@ class GameScene: SKScene {
         addChild(quitLabel)
         
         board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
+        
+        blue = 18
+        red = 18
 
         board.placeCells(at: self)
     }
@@ -95,7 +103,7 @@ class GameScene: SKScene {
         self.player = Player(name: name, number: number, isConnected: true)
         self.initialSetup()
         self.canPlay = true
-        board.placePieces(at: self)
+        self.board.placePieces(at: self)
     }
     
     func end() {
@@ -114,7 +122,10 @@ class GameScene: SKScene {
         }
         
         if self.nodes(at: position).first == quitLabel {
-            // MARK: TODO
+            RPCManager.shared.client.quit { (success) in
+                self.removeAllChildren()
+                NotificationCenter.default.post(name: .quit, object: nil)
+            }
             return
         }
         

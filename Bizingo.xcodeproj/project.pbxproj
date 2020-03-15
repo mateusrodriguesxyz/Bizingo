@@ -36,6 +36,7 @@
 		DCBE3A1823E46DBA00DD086D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCBE3A1623E46DBA00DD086D /* Main.storyboard */; };
 		DCBE3A1A23E46DBD00DD086D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCBE3A1923E46DBD00DD086D /* Assets.xcassets */; };
 		DCBE3A1D23E46DBD00DD086D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCBE3A1B23E46DBD00DD086D /* LaunchScreen.storyboard */; };
+		DCEA71CD241EC92C00AD7E8D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEA71CC241EC92C00AD7E8D /* Notification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		DCBE3A1923E46DBD00DD086D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCBE3A1C23E46DBD00DD086D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCBE3A1E23E46DBD00DD086D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCEA71CC241EC92C00AD7E8D /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				DC9B54BA23EB1DB5000A8A34 /* Cell.swift */,
 				DC1E6F2E23F6C94300800E3B /* Piece.swift */,
 				DC9B54B823EB1DA4000A8A34 /* Triangle.swift */,
+				DCEA71CC241EC92C00AD7E8D /* Notification.swift */,
 				DC1E6F2A23F5D3D300800E3B /* board.json */,
 				DC326C5A23F9FA8100C0A7ED /* board2.json */,
 				DCBE3A1623E46DBA00DD086D /* Main.storyboard */,
@@ -248,6 +251,7 @@
 				DC80F20524195989004A3B6E /* Server.swift in Sources */,
 				DC4273FA23E7036A00392E06 /* Board.swift in Sources */,
 				DC9B54B923EB1DA4000A8A34 /* Triangle.swift in Sources */,
+				DCEA71CD241EC92C00AD7E8D /* Notification.swift in Sources */,
 				DC80F20324195980004A3B6E /* Client.swift in Sources */,
 				DCBE3A1523E46DBA00DD086D /* GameViewController.swift in Sources */,
 				DCBE3A0D23E46DBA00DD086D /* AppDelegate.swift in Sources */,

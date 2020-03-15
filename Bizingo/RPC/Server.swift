@@ -15,6 +15,8 @@ class BizingoServer {
     
     var port: Int?
     
+    var isRunning = false
+    
     var provider = GameProvider()
     
     var onRun: ((Int) -> ())?
@@ -45,6 +47,7 @@ class BizingoServer {
             .whenSuccess { address in
                 if let port = address?.port {
                     self.port = port
+                    self.isRunning = true
                     self.onRun?(port)
                     print("server started on port \(port)")
                 }

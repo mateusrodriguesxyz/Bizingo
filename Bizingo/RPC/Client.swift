@@ -79,6 +79,19 @@ class BizingoClient {
         
     }
     
+    func quit(onResponse: (Bool) -> ()) {
+        
+        let request = Bizingo_QuitRequest.with { _ in }
+
+        do {
+            let response = try service.quit(request).response.wait()
+            onResponse(response.success)
+        } catch {
+            print("Failed: \(error)")
+        }
+        
+    }
+    
     func send(_ move: Move, onResponse: (Bool) -> ()) {
         do {
             let data = try JSONEncoder().encode(move)
