@@ -25,7 +25,7 @@
 		DC80F20124195951004A3B6E /* RPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80F20024195951004A3B6E /* RPCManager.swift */; };
 		DC80F20324195980004A3B6E /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80F20224195980004A3B6E /* Client.swift */; };
 		DC80F20524195989004A3B6E /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80F20424195989004A3B6E /* Server.swift */; };
-		DC80F20724195A53004A3B6E /* ChatProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80F20624195A53004A3B6E /* ChatProvider.swift */; };
+		DC80F20724195A53004A3B6E /* GameProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80F20624195A53004A3B6E /* GameProvider.swift */; };
 		DC80F20924195E38004A3B6E /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80F20824195E38004A3B6E /* JoinViewController.swift */; };
 		DC9B54B923EB1DA4000A8A34 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B54B823EB1DA4000A8A34 /* Triangle.swift */; };
 		DC9B54BB23EB1DB5000A8A34 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B54BA23EB1DB5000A8A34 /* Cell.swift */; };
@@ -58,7 +58,7 @@
 		DC80F20024195951004A3B6E /* RPCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCManager.swift; sourceTree = "<group>"; };
 		DC80F20224195980004A3B6E /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		DC80F20424195989004A3B6E /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		DC80F20624195A53004A3B6E /* ChatProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatProvider.swift; sourceTree = "<group>"; };
+		DC80F20624195A53004A3B6E /* GameProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProvider.swift; sourceTree = "<group>"; };
 		DC80F20824195E38004A3B6E /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		DC9B54B823EB1DA4000A8A34 /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		DC9B54BA23EB1DB5000A8A34 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 				DC80F20024195951004A3B6E /* RPCManager.swift */,
 				DC80F20424195989004A3B6E /* Server.swift */,
 				DC80F20224195980004A3B6E /* Client.swift */,
-				DC80F20624195A53004A3B6E /* ChatProvider.swift */,
+				DC80F20624195A53004A3B6E /* GameProvider.swift */,
 				DC80F1FC24195941004A3B6E /* bizingo.grpc.swift */,
 				DC80F1FD24195941004A3B6E /* bizingo.pb.swift */,
 				DC80F1FA2419578D004A3B6E /* bizingo.proto */,
@@ -263,7 +263,7 @@
 				DCB6203423F3296C00A89622 /* MessageTableViewCell.swift in Sources */,
 				DC1E6F2F23F6C94300800E3B /* Piece.swift in Sources */,
 				DC0C6D2323F1ED0F008F4D77 /* PlayerTableViewCell.swift in Sources */,
-				DC80F20724195A53004A3B6E /* ChatProvider.swift in Sources */,
+				DC80F20724195A53004A3B6E /* GameProvider.swift in Sources */,
 				DC1E6F3123F6E43F00800E3B /* Move.swift in Sources */,
 				DC9B54BB23EB1DB5000A8A34 /* Cell.swift in Sources */,
 				DCB6203123F3273C00A89622 /* Message.swift in Sources */,

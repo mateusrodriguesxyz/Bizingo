@@ -30,17 +30,23 @@ class ChatViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        SCKManager.shared.getChatMessage { (message) in
-//            DispatchQueue.main.async {
-//                self.messages.append(message)
-//                self.tableView.reloadData()
-//            }
-//        }
+        RPCManager.shared.onMessage { (message) in
+            self.messages.append(message)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     @IBAction func send(_ sender: Any) {
-        if !textField.text!.isEmpty, let message = textField.text {
-//            SCKManager.shared.send(message: message, with: nickname)
+        if !textField.text!.isEmpty, let content = textField.text {
+            let message = Message(sender: player, content: content)
+            RPCManager.shared.client.send(message) { _ in
+                self.messages.append(message)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
             textField.text = nil
             textField.resignFirstResponder()
         }

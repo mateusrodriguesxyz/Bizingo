@@ -24,7 +24,10 @@ service Game {
     rpc Start (StartRequest) returns (StartReply) {}
     rpc End (EndRequest) returns (EndReply) {}
     rpc Move (MoveRequest) returns (MoveReply) {}
+    rpc Message (MessageRequest) returns (MessageReply) {}
 }
+
+// Invite
 
 message InviteRequest {
     string name = 1;
@@ -34,11 +37,25 @@ message InviteReply {
     bool success = 1;
 }
 
+// Start
+
 message StartRequest { }
 
 message StartReply {
     bool success = 1;
 }
+
+// End
+
+message EndRequest {
+    string winner = 1;
+}
+
+message EndReply {
+    bool success = 1;
+}
+
+// Move
 
 message MoveRequest {
     
@@ -61,10 +78,13 @@ message MoveReply {
     bool success = 1;
 }
 
-message EndRequest {
-    string winner = 1;
+// Message
+
+message MessageRequest {
+    string sender = 1;
+    string content = 2;
 }
 
-message EndReply {
+message MessageReply {
     bool success = 1;
 }

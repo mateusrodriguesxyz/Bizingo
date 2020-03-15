@@ -8,8 +8,25 @@
 
 import Foundation
 
-struct Message {
+struct Message: Codable {
+    
     var sender: Int
     var content: String
-    var date: String
+    
+    init(sender: Int, content: String) {
+        self.sender = sender
+        self.content = content
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        sender = try values.decodeIfPresent(Int.self, forKey: .sender) ?? 0
+        content = try values.decode(String.self, forKey: .content)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case sender
+        case content
+    }
+    
 }

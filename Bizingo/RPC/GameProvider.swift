@@ -12,27 +12,31 @@ import NIO
 
 class GameProvider: Bizingo_GameProvider {
     
+    var onInvite: ((Move) -> ())?
+    
     var onStart: (() -> ())?
     
     var onEnd: ((String) -> ())?
     
     var onMove: ((Move) -> ())?
     
-    var onInvite: ((Move) -> ())?
+    var onMessage: ((Message) -> ())?
     
     func move(request: Bizingo_MoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MoveReply> {
-        
         if let move = try? JSONDecoder().decode(Move.self, from: request.jsonUTF8Data()) {
             self.onMove?(move)
         }
-        
-//        let from = Move.Coordinate(row: Int(request.from.row), column: Int(request.from.column))
-//        let to = Move.Coordinate(row: Int(request.to.row), column: Int(request.to.column))
-//
-//        let move = Move(from: from, to: to)
-//
-        
         let response = Bizingo_MoveReply.with {
+            $0.success = true
+        }
+        return context.eventLoop.makeSucceededFuture(response)
+    }
+    
+    func message(request: Bizingo_MessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MessageReply> {
+        if let message = try? JSONDecoder().decode(Message.self, from: request.jsonUTF8Data()) {
+            self.onMessage?(message)
+        }
+        let response = Bizingo_MessageReply.with {
             $0.success = true
         }
         return context.eventLoop.makeSucceededFuture(response)

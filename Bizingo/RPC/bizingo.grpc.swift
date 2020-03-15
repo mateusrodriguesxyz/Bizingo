@@ -33,6 +33,7 @@ internal protocol Bizingo_GameService {
   func start(_ request: Bizingo_StartRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_StartRequest, Bizingo_StartReply>
   func end(_ request: Bizingo_EndRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_EndRequest, Bizingo_EndReply>
   func move(_ request: Bizingo_MoveRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_MoveRequest, Bizingo_MoveReply>
+  func message(_ request: Bizingo_MessageRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_MessageRequest, Bizingo_MessageReply>
 }
 
 internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService {
@@ -97,6 +98,18 @@ internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService 
                               callOptions: callOptions ?? self.defaultCallOptions)
   }
 
+  /// Asynchronous unary call to Message.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Message.
+  ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func message(_ request: Bizingo_MessageRequest, callOptions: CallOptions? = nil) -> UnaryCall<Bizingo_MessageRequest, Bizingo_MessageReply> {
+    return self.makeUnaryCall(path: "/bizingo.Game/Message",
+                              request: request,
+                              callOptions: callOptions ?? self.defaultCallOptions)
+  }
+
 }
 
 /// To build a server, implement a class that conforms to this protocol.
@@ -105,6 +118,7 @@ internal protocol Bizingo_GameProvider: CallHandlerProvider {
   func start(request: Bizingo_StartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_StartReply>
   func end(request: Bizingo_EndRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_EndReply>
   func move(request: Bizingo_MoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MoveReply>
+  func message(request: Bizingo_MessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MessageReply>
 }
 
 extension Bizingo_GameProvider {
@@ -139,6 +153,13 @@ extension Bizingo_GameProvider {
       return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
         return { request in
           self.move(request: request, context: context)
+        }
+      }
+
+    case "Message":
+      return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
+        return { request in
+          self.message(request: request, context: context)
         }
       }
 

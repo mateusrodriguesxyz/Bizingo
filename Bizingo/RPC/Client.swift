@@ -90,5 +90,16 @@ class BizingoClient {
         }
     }
     
+    func send(_ message: Message, onResponse: (Bool) -> ()) {
+        do {
+            let data = try JSONEncoder().encode(message)
+            let request = try Bizingo_MessageRequest(jsonUTF8Data: data)
+            let response = try service.message(request).response.wait()
+            onResponse(response.success)
+        } catch {
+            print("Failed: \(error)")
+        }
+    }
+    
     
 }
