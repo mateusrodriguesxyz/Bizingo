@@ -16,6 +16,8 @@ class GameProvider: Bizingo_GameProvider {
     
     var onStart: (() -> ())?
     
+    var onRestart: (() -> ())?
+    
     var onEnd: ((String) -> ())?
     
     var onQuit: (() -> ())?
@@ -54,6 +56,14 @@ class GameProvider: Bizingo_GameProvider {
     func start(request: Bizingo_StartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_StartReply> {
         self.onStart?()
         let response = Bizingo_StartReply.with {
+            $0.success = true
+        }
+        return context.eventLoop.makeSucceededFuture(response)
+    }
+    
+    func restart(request: Bizingo_RestartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_RestartReply> {
+        self.onRestart?()
+        let response = Bizingo_RestartReply.with {
             $0.success = true
         }
         return context.eventLoop.makeSucceededFuture(response)

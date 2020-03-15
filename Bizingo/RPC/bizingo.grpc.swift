@@ -31,6 +31,7 @@ import SwiftProtobuf
 internal protocol Bizingo_GameService {
   func invite(_ request: Bizingo_InviteRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_InviteRequest, Bizingo_InviteReply>
   func start(_ request: Bizingo_StartRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_StartRequest, Bizingo_StartReply>
+  func restart(_ request: Bizingo_RestartRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_RestartRequest, Bizingo_RestartReply>
   func end(_ request: Bizingo_EndRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_EndRequest, Bizingo_EndReply>
   func quit(_ request: Bizingo_QuitRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_QuitRequest, Bizingo_QuitReply>
   func move(_ request: Bizingo_MoveRequest, callOptions: CallOptions?) -> UnaryCall<Bizingo_MoveRequest, Bizingo_MoveReply>
@@ -71,6 +72,18 @@ internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService 
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func start(_ request: Bizingo_StartRequest, callOptions: CallOptions? = nil) -> UnaryCall<Bizingo_StartRequest, Bizingo_StartReply> {
     return self.makeUnaryCall(path: "/bizingo.Game/Start",
+                              request: request,
+                              callOptions: callOptions ?? self.defaultCallOptions)
+  }
+
+  /// Asynchronous unary call to Restart.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Restart.
+  ///   - callOptions: Call options; `self.defaultCallOptions` is used if `nil`.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func restart(_ request: Bizingo_RestartRequest, callOptions: CallOptions? = nil) -> UnaryCall<Bizingo_RestartRequest, Bizingo_RestartReply> {
+    return self.makeUnaryCall(path: "/bizingo.Game/Restart",
                               request: request,
                               callOptions: callOptions ?? self.defaultCallOptions)
   }
@@ -129,6 +142,7 @@ internal final class Bizingo_GameServiceClient: GRPCClient, Bizingo_GameService 
 internal protocol Bizingo_GameProvider: CallHandlerProvider {
   func invite(request: Bizingo_InviteRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_InviteReply>
   func start(request: Bizingo_StartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_StartReply>
+  func restart(request: Bizingo_RestartRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_RestartReply>
   func end(request: Bizingo_EndRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_EndReply>
   func quit(request: Bizingo_QuitRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_QuitReply>
   func move(request: Bizingo_MoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Bizingo_MoveReply>
@@ -153,6 +167,13 @@ extension Bizingo_GameProvider {
       return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
         return { request in
           self.start(request: request, context: context)
+        }
+      }
+
+    case "Restart":
+      return UnaryCallHandler(callHandlerContext: callHandlerContext) { context in
+        return { request in
+          self.restart(request: request, context: context)
         }
       }
 

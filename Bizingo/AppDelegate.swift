@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
+        RPCManager.shared.client.quit { _ in }
 //        if let nickname = UserDefaults.standard.string(forKey: "nickname") {
 //            SCKManager.shared.exit(with: nickname, completionHandler: nil)
 //        }

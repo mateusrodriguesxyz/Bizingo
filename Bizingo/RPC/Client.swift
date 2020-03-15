@@ -64,6 +64,19 @@ class BizingoClient {
         
     }
     
+    func restart(onResponse: (Bool) -> ()) {
+        
+        let request = Bizingo_RestartRequest.with { _ in }
+
+        do {
+            let response = try service.restart(request).response.wait()
+            onResponse(response.success)
+        } catch {
+            print("Failed: \(error)")
+        }
+        
+    }
+    
     func end(onResponse: (Bool) -> ()) {
         
         let request = Bizingo_EndRequest.with {

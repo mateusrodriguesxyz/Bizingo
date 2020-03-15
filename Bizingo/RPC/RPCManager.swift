@@ -33,6 +33,10 @@ class RPCManager {
         server.provider.onStart = handler
     }
     
+    public func onRestart(handler: @escaping () -> ()) {
+        server.provider.onRestart = handler
+    }
+    
     public func onEnd(handler: @escaping (String) -> ()) {
         server.provider.onEnd = handler
     }

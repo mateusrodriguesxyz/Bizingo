@@ -61,6 +61,10 @@ class GameScene: SKScene {
         
         NotificationCenter.default.addObserver(self, selector: #selector(start), name: .start, object: nil)
         
+        RPCManager.shared.onRestart {
+            self.start()
+        }
+        
         RPCManager.shared.onEnd { (winner) in
             self.winnerLabel.text = "YOU LOST THE GAME!"
         }
@@ -117,7 +121,9 @@ class GameScene: SKScene {
         guard let position = touches.first?.location(in: self) else { return }
         
         if self.nodes(at: position).first == restartLabel {
-            // MARK: TODO
+            RPCManager.shared.client.restart { (success) in
+                self.start()
+            }
             return
         }
         

@@ -22,6 +22,7 @@ package bizingo;
 service Game {
     rpc Invite (InviteRequest) returns (InviteReply) {}
     rpc Start (StartRequest) returns (StartReply) {}
+    rpc Restart (RestartRequest) returns (RestartReply) {}
     rpc End (EndRequest) returns (EndReply) {}
     rpc Quit (QuitRequest) returns (QuitReply) {}
     rpc Move (MoveRequest) returns (MoveReply) {}
@@ -43,6 +44,14 @@ message InviteReply {
 message StartRequest { }
 
 message StartReply {
+    bool success = 1;
+}
+
+// Start
+
+message RestartRequest { }
+
+message RestartReply {
     bool success = 1;
 }
 
