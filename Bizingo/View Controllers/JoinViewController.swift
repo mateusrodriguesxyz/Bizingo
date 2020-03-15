@@ -57,13 +57,27 @@ class JoinViewController: UIViewController {
         
         
     }
+    
     @IBAction func start(_ sender: UIButton) {
         RPCManager.shared.client.start { (success) in
             if success {
+                
                 self.startButton.isEnabled = false
                 self.startButton.alpha = 0.5
+                
                 UserDefaults.standard.set(0, forKey: "number")
+                
                 NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
+                
+                let chat = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chat-controller") as! ChatViewController
+                
+                chat.view.frame = view.bounds
+                self.view.addSubview(chat.view)
+                
+                UIView.transition(from: self.view, to: chat.view, duration: 0.25, options: .transitionCrossDissolve) { _ in
+                    chat.didMove(toParent: self)
+                }
+                
             }
         }
     }

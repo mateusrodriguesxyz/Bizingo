@@ -13,9 +13,7 @@ class ChatViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
     
-    var nickname: String!
-    
-    var players = [Player]()
+    let player = UserDefaults.standard.integer(forKey: "number")
     
     var messages = [Message]()
     
@@ -59,11 +57,9 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         let message = messages[indexPath.row]
         cell.messageLabel.text = message.content
         
-        let player = players.first { $0.name == message.sender }
+        cell.balloonView.backgroundColor = message.sender == 0 ? .systemBlue : .systemRed
         
-        cell.balloonView.backgroundColor = player!.number == 0 ? .systemBlue : .systemRed
-        
-        if message.sender == nickname {
+        if message.sender == player {
             cell.leadingConstraint.isActive = false
             cell.trailingConstraint.isActive = true
         } else {

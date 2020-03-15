@@ -32,24 +32,22 @@ class GameScene: SKScene {
     let winnerLabel = SKLabelNode()
     
     var board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
-
-    var red = 18 {
-        didSet {
-            if red == 0 {
-//                SCKManager.shared.socket.emit("end", 0)
-            }
-        }
-    }
-    
     
     var blue = 18 {
         didSet {
-            if blue == 0 {
-//                SCKManager.shared.socket.emit("end", 1)
+            if blue == 0, player.number == 0 {
+                self.end()
             }
         }
     }
-    
+
+    var red = 18 {
+        didSet {
+            if red == 0, player.number == 1 {
+                self.end()
+            }
+        }
+    }
     
     var selectedPiece: Piece! = nil
     
@@ -64,6 +62,10 @@ class GameScene: SKScene {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         NotificationCenter.default.addObserver(self, selector: #selector(start), name:  Notification.Name("start_game"), object: nil)
+        
+        RPCManager.shared.onEnd { (winner) in
+            self.winnerLabel.text = "YOU LOST THE GAME!"
+        }
         
         RPCManager.shared.onMove {
             self.apply(move: $0)
@@ -147,11 +149,18 @@ class GameScene: SKScene {
         board.placePieces(at: self)
     }
     
+    func end() {
+        RPCManager.shared.client.end { (success) in
+            self.winnerLabel.text = "YOU WON THE GAME!"
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         guard let position = touches.first?.location(in: self) else { return }
         
         if self.nodes(at: position).first == restartLabel {
+            self.start()
 //            SCKManager.shared.socket.emit("restart", true)
             return
         }

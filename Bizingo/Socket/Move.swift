@@ -14,8 +14,26 @@ struct Move: Codable {
     var to: Coordinate
     
     struct Coordinate: Codable {
+        
         var row: Int
         var column: Int
+        
+        init(row: Int, column: Int) {
+            self.row = row
+            self.column = column
+        }
+        
+        init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            row = try values.decodeIfPresent(Int.self, forKey: .row) ?? 0
+            column = try values.decodeIfPresent(Int.self, forKey: .column) ?? 0
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case row
+            case column
+        }
+        
     }
     
 }
