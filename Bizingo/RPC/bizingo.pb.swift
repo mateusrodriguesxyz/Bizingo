@@ -178,7 +178,7 @@ struct Bizingo_MessageRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var sender: String = String()
+  var sender: Int32 = 0
 
   var content: String = String()
 
@@ -545,7 +545,7 @@ extension Bizingo_MessageRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.sender)
+      case 1: try decoder.decodeSingularInt32Field(value: &self.sender)
       case 2: try decoder.decodeSingularStringField(value: &self.content)
       default: break
       }
@@ -553,8 +553,8 @@ extension Bizingo_MessageRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.sender.isEmpty {
-      try visitor.visitSingularStringField(value: self.sender, fieldNumber: 1)
+    if self.sender != 0 {
+      try visitor.visitSingularInt32Field(value: self.sender, fieldNumber: 1)
     }
     if !self.content.isEmpty {
       try visitor.visitSingularStringField(value: self.content, fieldNumber: 2)

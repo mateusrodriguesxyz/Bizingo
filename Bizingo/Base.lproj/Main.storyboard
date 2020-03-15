@@ -180,7 +180,7 @@
                                             <constraint firstAttribute="height" constant="30" id="DR4-se-L7V"/>
                                             <constraint firstAttribute="width" constant="120" id="mqJ-BU-DuT"/>
                                         </constraints>
-                                        <state key="normal" title="INVITE TO PLAY">
+                                        <state key="normal" title="CONNECT">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>

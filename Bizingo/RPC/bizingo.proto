@@ -81,7 +81,7 @@ message MoveReply {
 // Message
 
 message MessageRequest {
-    string sender = 1;
+    int32 sender = 1;
     string content = 2;
 }
 

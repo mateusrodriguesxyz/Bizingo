@@ -27,12 +27,8 @@ class JoinViewController: UIViewController {
         }
         
         RPCManager.shared.onStart {
-            DispatchQueue.main.async {
-                self.startButton.isEnabled = false
-                self.startButton.alpha = 0.5
-            }
             UserDefaults.standard.set(1, forKey: "number")
-            NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
+            self.start()
         }
         
     }
@@ -51,7 +47,7 @@ class JoinViewController: UIViewController {
                 nameTextField.isEnabled = false
                 portTextField.isEnabled = false
                 sender.backgroundColor = .systemGreen
-                sender.setTitle("ACCEPTED", for: .normal)
+                sender.setTitle("CONNECTED", for: .normal)
             }
         }
         
@@ -61,24 +57,30 @@ class JoinViewController: UIViewController {
     @IBAction func start(_ sender: UIButton) {
         RPCManager.shared.client.start { (success) in
             if success {
-                
-                self.startButton.isEnabled = false
-                self.startButton.alpha = 0.5
-                
                 UserDefaults.standard.set(0, forKey: "number")
-                
-                NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
-                
-                let chat = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chat-controller") as! ChatViewController
-                
-                chat.view.frame = view.bounds
-                self.view.addSubview(chat.view)
-                
-                UIView.transition(from: self.view, to: chat.view, duration: 0.25, options: .transitionCrossDissolve) { _ in
-                    chat.didMove(toParent: self)
-                }
-                
+                self.start()
             }
         }
     }
+    
+    private func start() {
+        DispatchQueue.main.async {
+            
+            NotificationCenter.default.post(name: NSNotification.Name("start_game"), object: nil)
+            
+            self.startButton.isEnabled = false
+            self.startButton.alpha = 0.5
+            
+            let chat = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chat-controller") as! ChatViewController
+            
+            chat.view.frame = self.view.bounds
+            self.view.addSubview(chat.view)
+            
+            UIView.transition(from: self.view, to: chat.view, duration: 0.25, options: .transitionCrossDissolve) { _ in
+                chat.didMove(toParent: self)
+            }
+            
+        }
+    }
+    
 }
