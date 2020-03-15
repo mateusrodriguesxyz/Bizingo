@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC0C6D2023F1DF15008F4D77 /* SCKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C6D1F23F1DF15008F4D77 /* SCKManager.swift */; };
 		DC0C6D2323F1ED0F008F4D77 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C6D2123F1ED0F008F4D77 /* PlayerTableViewCell.swift */; };
 		DC0C6D2423F1ED0F008F4D77 /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC0C6D2223F1ED0F008F4D77 /* PlayerTableViewCell.xib */; };
 		DC0C6D2623F1F574008F4D77 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0C6D2523F1F574008F4D77 /* ChatViewController.swift */; };
@@ -16,7 +15,6 @@
 		DC1E6F3123F6E43F00800E3B /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1E6F3023F6E43F00800E3B /* Move.swift */; };
 		DC326C5B23F9FA8100C0A7ED /* board2.json in Resources */ = {isa = PBXBuildFile; fileRef = DC326C5A23F9FA8100C0A7ED /* board2.json */; };
 		DC4273FA23E7036A00392E06 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4273F923E7036A00392E06 /* Board.swift */; };
-		DC50C33423F1D467006EDF15 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50C33323F1D467006EDF15 /* PlayersViewController.swift */; };
 		DC6F3C7123F1FC9A00E4B75B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F3C7023F1FC9A00E4B75B /* Player.swift */; };
 		DC80F1F524195650004A3B6E /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = DC80F1F424195650004A3B6E /* GRPC */; };
 		DC80F1FB2419578D004A3B6E /* bizingo.proto in Sources */ = {isa = PBXBuildFile; fileRef = DC80F1FA2419578D004A3B6E /* bizingo.proto */; };
@@ -41,7 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DC0C6D1F23F1DF15008F4D77 /* SCKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCKManager.swift; sourceTree = "<group>"; };
 		DC0C6D2123F1ED0F008F4D77 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		DC0C6D2223F1ED0F008F4D77 /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
 		DC0C6D2523F1F574008F4D77 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +47,6 @@
 		DC1E6F3023F6E43F00800E3B /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		DC326C5A23F9FA8100C0A7ED /* board2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = board2.json; sourceTree = "<group>"; };
 		DC4273F923E7036A00392E06 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
-		DC50C33323F1D467006EDF15 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		DC6F3C7023F1FC9A00E4B75B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		DC80F1FA2419578D004A3B6E /* bizingo.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = bizingo.proto; sourceTree = "<group>"; };
 		DC80F1FC24195941004A3B6E /* bizingo.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bizingo.grpc.swift; sourceTree = "<group>"; };
@@ -87,17 +83,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DC6F3C6F23F1FC7A00E4B75B /* Socket */ = {
-			isa = PBXGroup;
-			children = (
-				DC0C6D1F23F1DF15008F4D77 /* SCKManager.swift */,
-				DC6F3C7023F1FC9A00E4B75B /* Player.swift */,
-				DCB6203023F3273C00A89622 /* Message.swift */,
-				DC1E6F3023F6E43F00800E3B /* Move.swift */,
-			);
-			path = Socket;
-			sourceTree = "<group>";
-		};
 		DC80F1F824195705004A3B6E /* RPC */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,12 +97,21 @@
 			path = RPC;
 			sourceTree = "<group>";
 		};
+		DCB12BAA241E99A8007A1C50 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DC6F3C7023F1FC9A00E4B75B /* Player.swift */,
+				DCB6203023F3273C00A89622 /* Message.swift */,
+				DC1E6F3023F6E43F00800E3B /* Move.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DCB6202F23F3177100A89622 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				DCBE3A1423E46DBA00DD086D /* GameViewController.swift */,
 				DC80F20824195E38004A3B6E /* JoinViewController.swift */,
-				DC50C33323F1D467006EDF15 /* PlayersViewController.swift */,
 				DC0C6D2523F1F574008F4D77 /* ChatViewController.swift */,
 			);
 			path = "View Controllers";
@@ -144,8 +138,8 @@
 			children = (
 				DCBE3A0C23E46DBA00DD086D /* AppDelegate.swift */,
 				DCBE3A1223E46DBA00DD086D /* GameScene.swift */,
+				DCB12BAA241E99A8007A1C50 /* Model */,
 				DC80F1F824195705004A3B6E /* RPC */,
-				DC6F3C6F23F1FC7A00E4B75B /* Socket */,
 				DCB6202F23F3177100A89622 /* View Controllers */,
 				DC4273F923E7036A00392E06 /* Board.swift */,
 				DC9B54BA23EB1DB5000A8A34 /* Cell.swift */,
@@ -251,7 +245,6 @@
 				DC80F1FF24195941004A3B6E /* bizingo.pb.swift in Sources */,
 				DC80F20124195951004A3B6E /* RPCManager.swift in Sources */,
 				DCBE3A1323E46DBA00DD086D /* GameScene.swift in Sources */,
-				DC50C33423F1D467006EDF15 /* PlayersViewController.swift in Sources */,
 				DC80F20524195989004A3B6E /* Server.swift in Sources */,
 				DC4273FA23E7036A00392E06 /* Board.swift in Sources */,
 				DC9B54B923EB1DA4000A8A34 /* Triangle.swift in Sources */,
@@ -268,7 +261,6 @@
 				DC9B54BB23EB1DB5000A8A34 /* Cell.swift in Sources */,
 				DCB6203123F3273C00A89622 /* Message.swift in Sources */,
 				DC0C6D2623F1F574008F4D77 /* ChatViewController.swift in Sources */,
-				DC0C6D2023F1DF15008F4D77 /* SCKManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

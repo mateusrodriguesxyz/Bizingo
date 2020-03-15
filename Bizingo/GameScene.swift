@@ -15,7 +15,6 @@ class GameScene: SKScene {
         let node = SKLabelNode(fontNamed: "AvenirNext-Bold")
         node.text = "RESTART"
         node.fontSize = 50
-        node.alpha = 0
         node.horizontalAlignmentMode = .left
         return node
     }()
@@ -24,14 +23,13 @@ class GameScene: SKScene {
         let node = SKLabelNode(fontNamed: "AvenirNext-Bold")
         node.text = "QUIT"
         node.fontSize = 50
-        node.alpha = 0
         node.horizontalAlignmentMode = .left
         return node
     }()
     
     let winnerLabel = SKLabelNode()
     
-    var board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
+    var board: Board!
     
     var blue = 18 {
         didSet {
@@ -71,61 +69,12 @@ class GameScene: SKScene {
             self.apply(move: $0)
         }
         
-//        SCKManager.shared.socket.on("userConnectUpdate") { (data, _) in
-//            let player = Player(data: data[0] as! [String : AnyObject])
-//            if player.nickname == self.nickname {
-//                self.player = player
-//                self.canPlay = player.number == 0
-//            }
-//        }
-//
-//        SCKManager.shared.socket.on("players") { (data, _) in
-//            let players = (data[0] as? [[String: AnyObject]])?.map(Player.init)
-//            if players?.count == 2 {
-//                self.restartLabel.alpha = 1
-//                self.quitLabel.alpha = 1
-//                self.board.placePieces(at: self)
-//            } else {
-//                self.initialSetup()
-//            }
-//        }
-//
-//
-//        SCKManager.shared.socket.on("winner") { (data, _) in
-//            let winner = data[0] as! Int
-//            if self.player.number == winner {
-//                self.winnerLabel.text = "YOU WON THE GAME!"
-//            } else {
-//                self.winnerLabel.text = "YOU LOST THE GAME!"
-//            }
-//        }
-//
-//        SCKManager.shared.getGameMovement { (move) in
-//            if let move = move {
-//                self.canPlay.toggle()
-//
-//                self.apply(move: move)
-//            }
-//        }
-//
-//        SCKManager.shared.socket.on("restart") { (_, _) in
-//            self.restart()
-//        }
-//
-//        SCKManager.shared.socket.on("userExitUpdate") { (data, _) in
-//            if let quitter = data[0] as? String, quitter != self.nickname {
-//                self.canPlay = true
-//                self.player.number = 0
-//            } else {
-//                self.canPlay = true
-//                self.player.number = 1
-//            }
-//        }
-        
     }
     
     func initialSetup() {
-        self.removeAllChildren()
+        
+        removeAllChildren()
+        
         winnerLabel.position = CGPoint(x: frame.midX, y: frame.maxY/1.25)
         addChild(winnerLabel)
 
@@ -135,7 +84,7 @@ class GameScene: SKScene {
         quitLabel.position = CGPoint(x: frame.minX/1.1, y: frame.maxY/1.5)
         addChild(quitLabel)
         
-        self.board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
+        board = Board(contentsOf: Bundle.main.url(forResource: "board", withExtension: "json")!)!
 
         board.placeCells(at: self)
     }
@@ -160,14 +109,12 @@ class GameScene: SKScene {
         guard let position = touches.first?.location(in: self) else { return }
         
         if self.nodes(at: position).first == restartLabel {
-            self.start()
-//            SCKManager.shared.socket.emit("restart", true)
+            // MARK: TODO
             return
         }
         
         if self.nodes(at: position).first == quitLabel {
-//            SCKManager.shared.socket.emit("exit", self.player.nickname)
-            self.initialSetup()
+            // MARK: TODO
             return
         }
         
@@ -255,8 +202,4 @@ class GameScene: SKScene {
         
     }
     
-}
-
-func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
-    return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
 }
